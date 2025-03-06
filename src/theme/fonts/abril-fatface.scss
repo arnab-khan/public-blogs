@@ -1,0 +1,29 @@
+@use './generate-font-classes.scss' as generateFontsClasses;
+
+// Define font weights and corresponding file names
+$font-variations: (
+    'Regular': 400
+);
+
+// Define font sizes as an array
+$font-sizes: (
+    14,
+    16,
+    18,
+    20,
+    22
+);
+
+$font-family-name: 'abrilfatface';
+$path: 'Abril_Fatface/AbrilFatface';
+
+@include generateFontsClasses.generate-font-styles($path,$font-family-name, $font-variations, $font-sizes);
+
+/* Example font clacess:
+    .font-abrilfatface-400-16 {
+        font-family: "abrilfatface";
+        font-weight: 400;
+        font-style: normal;
+        font-size: 16px;
+    }
+*/

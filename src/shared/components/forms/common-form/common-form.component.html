@@ -1,0 +1,19 @@
+@if (formGroup) {
+<form [formGroup]='formGroup' (ngSubmit)="submit()" class="common-form">
+    <ul class="form-fields">
+        @for (formField of formFields; track $index) {
+        <li class="mt-5 form-field">
+            <div class="form-field-wrapper">
+                @let fieldInformation = formField.information;
+                @switch (fieldInformation.fieldType) {
+                @case ('text') {
+                <input [formControlName]='fieldInformation.controllName' type="text"
+                    [placeholder]="fieldInformation?.placeholder" class="font-poppins-400-18 w-100 px-3 py-2">
+                }
+                }
+            </div>
+        </li>
+        }
+    </ul>
+</form>
+}

@@ -1,0 +1,40 @@
+@use 'sass:list';
+@use "sass:math";
+
+// Mixin for generating font-face and classes
+@mixin generate-font-styles($path, $font-family-name, $font-variations, $font-sizes) {
+    @each $name, $weight-style in $font-variations {
+
+        // Define font-face
+        @font-face {
+            font-family: $font-family-name;
+            src: url('../../../public/fonts/#{$path}-#{$name}.ttf');
+            font-weight: list.nth($weight-style, 1); // Extract weight
+            font-style: if(list.length($weight-style) > 1, list.nth($weight-style, 2), normal); // Extract style
+        }
+
+        // Loop through font sizes for each font variation
+        @each $size in $font-sizes {
+            // Extract font weight and style
+            $weight: list.nth($weight-style, 1);
+            $style: if(list.length($weight-style) > 1, list.nth($weight-style, 2), normal);
+
+            // Generate class name
+            $class-name: '.font-#{$font-family-name}-#{$weight}-#{$size}';
+
+            // Append '-italic' if the style is italic, otherwise omit it
+            @if $style =='italic' {
+                $class-name: #{$class-name}-italic;
+            }
+
+            // Generate the class
+            #{$class-name} {
+                font-family: $font-family-name;
+                font-weight: #{$weight};
+                font-style: #{$style};
+                font-size: #{math.div($size, 16)}rem; // font size in rem
+                // font-size: calc(#{$size} * (0.125vw + 13.6px) / 16); // responsive font: font size 16px for 1920px screen will reduce to 14px for 320px screen
+            }
+        }
+    }
+}
