@@ -10,7 +10,7 @@ export class FormFieldsInformationService {
 
   fields:{[x:string]:FieldInformation} = {
     name: {
-      controllName: 'name',
+      controlName: 'name',
       fieldType: 'text',
       type: 'text',
       label: 'Name',
@@ -22,7 +22,7 @@ export class FormFieldsInformationService {
       ]
     },
     userName: {
-      controllName: 'userName',
+      controlName: 'userName',
       fieldType: 'text',
       type: 'text',
       label: 'User Name',
@@ -30,11 +30,24 @@ export class FormFieldsInformationService {
       validation: [
         { type: 'required', value: true, message: 'User Name is required' },
         { type: 'maxlength', value: 30, message: 'User Name should not exceed 30 characters' },
-        { type: 'pattern', value: /^[a-zA-Z0-9]+$/, message: 'User Name should contain only alphabets and numbers' }
+        { type: 'pattern', value: /^[a-zA-Z0-9]+$/, message: 'User Name should contain only alphabets and numbers' },
+      ]
+    },
+    checkUserName: {
+      controlName: 'checkUserName',
+      fieldType: 'checkUserName',
+      type: 'text',
+      label: 'User Name',
+      placeholder: 'Enter your user name',
+      validation: [
+        { type: 'required', value: true, message: 'User Name is required' },
+        { type: 'maxlength', value: 30, message: 'User Name should not exceed 30 characters' },
+        { type: 'pattern', value: /^[a-zA-Z0-9]+$/, message: 'User Name should contain only alphabets and numbers' },
+        { type: 'userNameExists', value: true, message: null }
       ]
     },
     password: {
-      controllName: 'password',
+      controlName: 'password',
       fieldType: 'text',
       type: 'password',
       label: 'Password',

@@ -1,11 +1,17 @@
-// .common-form{
-//     .form-fields{
-//         .form-field{
-//             .form-field-wrapper{
-//                 input{
-                    
-//                 } 
-//             }
-//         }
-//     }
-// }
+.common-form {
+    // .form-fields{
+    //     .form-field{
+    //         .form-field-wrapper{
+    //             input{
+
+    //             } 
+    //         }
+    //     }
+    // }
+    .submit-button {
+        display: block;
+        padding: 0.5rem 1rem;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}

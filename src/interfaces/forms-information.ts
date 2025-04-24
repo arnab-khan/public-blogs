@@ -3,6 +3,7 @@ export interface FormsInformation {
     signUp: () => FormInformation;
 }
 export interface FormInformation {
+    submitButton?: SubmitButton;
     formFields: FormFields[];
 }
 export interface FormFields {
@@ -10,7 +11,7 @@ export interface FormFields {
     sequence: number;
 }
 export interface FieldInformation {
-    controllName: string;
+    controlName: string;
     fieldType: string;
     type: string;
     label?: string;
@@ -19,6 +20,10 @@ export interface FieldInformation {
 }
 export interface Validation {
     type: string;
-    message: string;
+    message: string|null;
     value: any;
+}
+export interface SubmitButton {
+    label?: string;
+    classes?: string;
 }

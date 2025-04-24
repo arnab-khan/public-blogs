@@ -1,6 +1,6 @@
 <section class="sign-up-section">
     <div class="container-2 mw-100 mx-auto">
         <h1>Create account</h1>
-        <app-common-form [formInformation]="formInformation"></app-common-form>
+        <app-common-form [formInformation]="formInformation" (submitForm)="createUser($event)"></app-common-form>
     </div>
 </section>

@@ -12,6 +12,10 @@ export class FormsInformationService {
   forms: FormsInformation = {
     login: () => {
       return {
+        submitButton: {
+          label: 'Login',
+          classes: 'btn btn-primary',
+        },
         formFields: [
           {
             information: this.formFieldsInformationService.fields['userName'],
@@ -26,13 +30,17 @@ export class FormsInformationService {
     },
     signUp: () => {
       return {
+        submitButton: {
+          label: 'Sign Up',
+          classes: 'btn btn-primary',
+        },
         formFields: [
           {
             information: this.formFieldsInformationService.fields['name'],
             sequence: 1,
           },
           {
-            information: this.formFieldsInformationService.fields['userName'],
+            information: this.formFieldsInformationService.fields['checkUserName'],
             sequence: 2,
           },
           {
