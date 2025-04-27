@@ -1,0 +1,9 @@
+.menues {
+    .menu {
+        .link {
+            &:hover {
+                color: inherit !important;
+            }
+        }
+    }
+}

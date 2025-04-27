@@ -14,9 +14,13 @@ export interface LoginUser {
     password: string;
 }
 
-export interface User {
-    message: string;
+export interface UserResponse {
     token: string;
+    user: User;
+}
+
+export interface User {
+    admin?: boolean;
     _id: string;
     userName: string;
     name: string;

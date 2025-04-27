@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { toHttpParams } from '../../../utils/http';
 import { environment } from '../../../../environments/environment';
-import { CheckUsername, CreateUser, LoginUser, User } from '../../../../interfaces/auth';
+import { CheckUsername, CreateUser, LoginUser, User, UserResponse } from '../../../../interfaces/auth';
 
 @Injectable({
   providedIn: 'root'
@@ -17,10 +17,14 @@ export class AuthService {
   }
 
   createUser(body: CreateUser) {
-    return this.httpClient.post<User>(`${this.baseApiUrl}/register`, body);
+    return this.httpClient.post<UserResponse>(`${this.baseApiUrl}/register`, body);
   }
 
   loginUser(body: LoginUser) {
-    return this.httpClient.post<User>(`${this.baseApiUrl}/login`, body);
+    return this.httpClient.post<UserResponse>(`${this.baseApiUrl}/login`, body);
+  }
+
+  getUser() {
+    return this.httpClient.get<User>(`${this.baseApiUrl}/user`);
   }
 }

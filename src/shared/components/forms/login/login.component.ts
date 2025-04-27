@@ -3,7 +3,9 @@ import { LoginUser } from '../../../../interfaces/auth';
 import { AuthService } from '../../../services/apis/auth/auth.service';
 import { FormsInformationService } from '../../../services/form/forms-information/forms-information.service';
 import { CommonFormComponent } from '../common-form/common-form.component';
-import { saveLocalStorage } from '../../../utils/local-storage';
+import { saveLocalStorage, saveToken } from '../../../utils/local-storage';
+import { Store } from '@ngrx/store';
+import { saveUser } from '../../../ngrx/ngrx.action';
 
 @Component({
   selector: 'app-login',
@@ -14,6 +16,7 @@ import { saveLocalStorage } from '../../../utils/local-storage';
 export class LoginComponent {
   private formsInformationService = inject(FormsInformationService);
   private authService = inject(AuthService);
+  private store = inject(Store);
 
   formInformation = this.formsInformationService.forms.login();
 
@@ -25,7 +28,7 @@ export class LoginComponent {
     this.authService.loginUser(body).subscribe({
       next: (response) => {
         console.log('response', response);
-        saveLocalStorage('token', response.token);
+        this.store.dispatch(saveUser(response.user));
       },
       error: (error) => {
         console.log('error', error);
