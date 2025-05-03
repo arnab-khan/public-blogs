@@ -1,0 +1,8 @@
+.like-list-button {
+    .text {
+        &:hover {
+            color: inherit !important;
+            text-decoration: underline;
+        }
+    }
+}

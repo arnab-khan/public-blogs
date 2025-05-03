@@ -18,7 +18,7 @@ export class HeaderComponent implements OnInit {
     this.store.select(userSelector).subscribe({
       next: (response) => {
         this.user = response;
-        console.log('user', this.user);
+        // console.log('user', this.user);
       }
     })
   }

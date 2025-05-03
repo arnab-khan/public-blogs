@@ -1,14 +1,38 @@
-<div>
-    <span>
-        {{blog?.author?.name}}
-    </span>
-    <span>
-        {{blog?.updatedAt | date:'medium'}}
-    </span>
-</div>
-<h2>
-    {{blog?.title}}
-</h2>
-<p>
-    {{blog?.content}}
-</p>
+<section class="blog-section">
+    <div>
+        <span class="font-poppins-600-18 text-black d-block">
+            {{blog?.author?.name}}
+        </span>
+        <span class="font-poppins-400-14 text-muted d-block">
+            {{blog?.createdAt | date:'medium'}}
+        </span>
+    </div>
+    <hr class="my-2 border-info" />
+    <div class="bg-light p-2 rounded-2">
+        <h2 class="font-poppins-500-18">
+            {{blog?.title}}
+        </h2>
+        <p class="font-poppins-400-16 mt-1 text-secondary">
+            {{blog?.content}}
+        </p>
+    </div>
+    <div class="mt-2">
+        <div>
+            <button class="text-primary like-list-button" (click)="showLikeList()">
+                <span class="font-poppins-600-16 text-black text">
+                    {{noOfLikes}} {{noOfLikes > 1 ? 'Likes' : 'Like'}}
+                </span>
+            </button>
+        </div>
+        <hr class="my-2 border-info" />
+        <div>
+            <button (click)="like()">
+                <fa-icon [icon]="isLiked?solidThumbsUp:regularThumbsUp"
+                    class="font-poppins-600-16 text-primary"></fa-icon>
+                <span class="font-poppins-600-16 text-primary">
+                    {{isLiked ? 'Unlike' : 'Like'}}
+                </span>
+            </button>
+        </div>
+    </div>
+</section>

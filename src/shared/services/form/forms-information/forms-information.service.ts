@@ -49,6 +49,24 @@ export class FormsInformationService {
           }
         ]
       }
+    },
+    post: () => {
+      return {
+        submitButton: {
+          label: 'Create Post',
+          classes: 'btn btn-primary',
+        },
+        formFields: [
+          {
+            information: this.formFieldsInformationService.fields['title'],
+            sequence: 1,
+          },
+          {
+            information: this.formFieldsInformationService.fields['content'],
+            sequence: 2,
+          }
+        ]
+      }
     }
   }
 }

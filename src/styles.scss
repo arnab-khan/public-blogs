@@ -1,7 +1,20 @@
-/* ==================== Start import font ==================== */
+/* ==================== Start import ==================== */
 @use './theme/fonts/font.scss' as *;
-/* ==================== End import font ==================== */
+@use '@angular/material' as mat;
+/* ==================== End import ==================== */
 
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+html {
+    @include mat.theme((color: (theme-type: light,
+                primary: mat.$azure-palette,
+                tertiary: mat.$blue-palette,
+            ),
+            typography: Roboto,
+            density: 0,
+        ));
+}
 
 
 // ==================== Start default style ====================
@@ -20,7 +33,7 @@ a {
 button {
     background-color: transparent;
     padding: 0;
-    border: 0;
+    border: 0 solid;
     outline: none;
     cursor: pointer;
     font: inherit;
@@ -77,6 +90,11 @@ strong {
     max-width: 100%;
 }
 
+.dialog-content {
+    max-height: 95vh;
+    overflow-y: auto;
+}
+
 .width-fit-content {
     width: fit-content;
 }
@@ -131,3 +149,12 @@ $scrollbar-shadow-color: rgba(0, 0, 0, 0.5);
 }
 
 // ==================== End common scrollbar ====================
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}

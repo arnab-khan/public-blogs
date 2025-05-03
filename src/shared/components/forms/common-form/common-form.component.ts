@@ -27,7 +27,7 @@ export class CommonFormComponent implements OnChanges {
   inputUserNameObserable = new BehaviorSubject<string>('');
   inputUserNameAvailability: CheckUsername | undefined;
 
-  submituttonLoader=false;
+  submituttonLoader = false;
 
   ngOnChanges(changes: SimpleChanges): void {
     console.log('formInformation', this.formInformation);
@@ -46,6 +46,9 @@ export class CommonFormComponent implements OnChanges {
         switch (validation.type) {
           case 'required':
             currentValidetion = Validators.required;
+            break;
+          case 'minlength':
+            currentValidetion = Validators.minLength(validation.value);
             break;
           case 'maxlength':
             currentValidetion = Validators.maxLength(validation.value);
@@ -86,10 +89,10 @@ export class CommonFormComponent implements OnChanges {
 
   submit() {
     console.log('formGroup value', this.formGroup?.value);
-    if (this.formGroup?.status=='VALID') {
+    if (this.formGroup?.status == 'VALID') {
       this.submitForm.emit(this.formGroup?.value);
     } else {
-      
+
     }
   }
 

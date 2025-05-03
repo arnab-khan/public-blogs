@@ -1,6 +1,7 @@
 export interface FormsInformation {
     login: () => FormInformation;
     signUp: () => FormInformation;
+    post: () => FormInformation;
 }
 export interface FormInformation {
     submitButton?: SubmitButton;

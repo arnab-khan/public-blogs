@@ -1,3 +1,16 @@
-@for (blog of blogs; track $index) {
-<app-blog [blog]="blog"></app-blog>
-}
+<section>
+    <div class="container-2 px-3 py-5 mx-auto">
+        <button
+            class="bg-primary border-danger-subtle border-3 rounded-pill text-white font-poppins-600-18 px-4 py-2 d-block mx-auto"
+            (click)="openCreateEditPostDialog()">
+            Write a blog
+        </button>
+        <ul>
+            @for (blog of blogs; track $index) {
+            <li class="shadow rounded-3 p-3 mt-4 bg-white">
+                <app-blog [blog]="blog"></app-blog>
+            </li>
+            }
+        </ul>
+    </div>
+</section>

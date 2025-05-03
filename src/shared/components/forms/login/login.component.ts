@@ -3,7 +3,6 @@ import { LoginUser } from '../../../../interfaces/auth';
 import { AuthService } from '../../../services/apis/auth/auth.service';
 import { FormsInformationService } from '../../../services/form/forms-information/forms-information.service';
 import { CommonFormComponent } from '../common-form/common-form.component';
-import { saveLocalStorage, saveToken } from '../../../utils/local-storage';
 import { Store } from '@ngrx/store';
 import { saveUser } from '../../../ngrx/ngrx.action';
 

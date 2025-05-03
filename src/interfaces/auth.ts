@@ -22,6 +22,6 @@ export interface UserResponse {
 export interface User {
     admin?: boolean;
     _id: string;
-    userName: string;
-    name: string;
+    userName?: string;
+    name?: string;
 }

@@ -1,20 +1,24 @@
 @if (formGroup) {
-
 <form [formGroup]='formGroup' (ngSubmit)="submit()" class="common-form">
     <ul class="form-fields">
         @for (formField of formFields; track $index) {
-        <li class="mt-5 form-field">
+        <li class="mt-4 form-field">
             <div class="form-field-wrapper">
                 @let fieldInformation = formField.information;
                 @let controlName = fieldInformation.controlName;
                 @let fieldControl = getFieldControl(controlName);
-                <label [for]="controlName" class="font-poppins-400-16 mb-2">
+                <label [for]="controlName" class="font-poppins-500-16 mb-2">
                     {{fieldInformation?.label}}
                 </label>
                 @switch (fieldInformation.fieldType) {
                 @case ('text') {
                 <input [formControlName]="controlName" [type]="fieldInformation.type"
                     [placeholder]="fieldInformation?.placeholder" class="font-poppins-400-18 w-100 px-3 py-2">
+                }
+                @case ('textarea') {
+                <textarea [formControlName]="controlName" [placeholder]="fieldInformation?.placeholder"
+                    class="font-poppins-400-18 w-100 px-3 py-2">
+                </textarea>
                 }
                 @case ('checkUserName') {
                 <input [formControlName]="'checkUserName'" type="text" [placeholder]="fieldInformation?.placeholder"
@@ -28,7 +32,7 @@
                 }
                 }
                 @for (validation of fieldInformation.validation; track $index) {
-                @let message=validation?.message;
+                @let message = validation?.message;
                 @if (fieldControl.errors?.[validation.type] && message) {
                 <div class="font-poppins-400-16 text-danger">{{message}}</div>
                 }}

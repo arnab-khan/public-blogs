@@ -1,0 +1,21 @@
+<div class="py-2 py-lg-4 position-relative dialog-content">
+    <button type="button" mat-dialog-close class="m-3 mt-2 position-absolute top-0 end-0">
+        <fa-icon [icon]="closeIcon" class="font-poppins-600-20 text-black"></fa-icon>
+    </button>
+    <div class="px-lg-3">
+        <h2 class="font-poppins-500-18">Likes</h2>
+        <p class="font-poppins-400-16 mt-1 text-secondary">This post has {{likes.length}} likes</p>
+    </div>
+    <ul class="px-lg-3 border-top border-info-subtle mt-3 pt-3">
+        @for (like of likes; track $index) {
+        <li [ngClass]="{'border-top border-info-subtle mt-3 pt-3': $index > 0}">
+            <span class="font-poppins-600-18 text-black d-block">
+                {{like?.user?.name}}
+            </span>
+            <span class="font-poppins-400-14 text-muted d-block">
+                {{like?.likedAt| date:'medium'}}
+            </span>
+        </li>
+        }
+    </ul>
+</div>
