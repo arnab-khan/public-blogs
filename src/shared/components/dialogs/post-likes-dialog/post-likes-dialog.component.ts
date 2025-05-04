@@ -8,7 +8,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @Component({
   selector: 'app-post-likes-dialog',
-  imports: [CommonModule,MatDialogModule, FontAwesomeModule],
+  imports: [CommonModule, MatDialogModule, FontAwesomeModule],
   templateUrl: './post-likes-dialog.component.html',
   styleUrl: './post-likes-dialog.component.scss'
 })

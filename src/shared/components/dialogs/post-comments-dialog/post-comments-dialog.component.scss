@@ -1,0 +1,15 @@
+.comment-wrapper {
+    border-radius: 2rem;
+
+    .comment {
+        span {
+            min-height: 1.5em;
+            font: inherit;
+        }
+
+        textarea {
+            font: inherit;
+            resize: none;
+        }
+    }
+}

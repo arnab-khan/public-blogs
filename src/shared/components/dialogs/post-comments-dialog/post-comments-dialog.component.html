@@ -1,0 +1,41 @@
+<div class="py-4 position-relative text-break dialog-content">
+    <button type="button" mat-dialog-close class="m-3 mt-2 position-absolute top-0 end-0">
+        <fa-icon [icon]="closeIcon" class="font-poppins-600-20 text-black"></fa-icon>
+    </button>
+    <div class="px-3 mt-2">
+        <div class="p-3 border-secondary border-2 border overflow-hidden bg-white comment-wrapper">
+            <div class="font-poppins-400-18 position-relative comment">
+                <span class="d-block">{{inputComment}}</span>
+                <textarea [(ngModel)]="inputComment"
+                    oninput="this.value = this.value.replace(/[\r\n]+/g, '').replace(/^\s+/, '').replace(/\s{2,}/g, ' ')"
+                    maxlength="500" class="border-0 position-absolute h-100 w-100 top-0 start-0 overflow-hidden"
+                    placeholder="Add a comment...">
+                </textarea>
+            </div>
+            @if (inputComment.length) {
+            <button class="font-poppins-600-16 btn btn-primary d-block ms-auto mt-1 py-1 px-3 rounded-pill"
+                (click)="addComment()">
+                Comment
+            </button>}
+        </div>
+    </div>
+    @if (comments.length) {
+    <ul class="px-3 border-top border-info-subtle mt-3 pt-3">
+        @for (comment of comments; track $index) {
+        <li [ngClass]="{'border-top border-info-subtle mt-3 pt-3': $index > 0}">
+            <div>
+                <span class="font-poppins-600-18 text-black d-block">
+                    {{comment?.user?.name}}
+                </span>
+                <span class="font-poppins-400-14 text-muted d-block">
+                    {{comment?.commentedAt| date:'medium'}}
+                </span>
+            </div>
+            <p class="font-poppins-400-16 mt-1 text-secondary">
+                {{comment?.content}}
+            </p>
+        </li>
+        }
+    </ul>
+    }
+</div>

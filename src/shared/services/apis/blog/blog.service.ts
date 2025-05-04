@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { CheckUsername } from '../../../../interfaces/auth';
-import { CreatePost, Like, LikeResponse, Post } from '../../../../interfaces/post';
+import { Comment, CreatePost, Like, LikeResponse, Post } from '../../../../interfaces/post';
 
 @Injectable({
   providedIn: 'root'
@@ -20,10 +20,18 @@ export class BlogService {
   }
 
   likeBlog(postId: string) {
-    return this.httpClient.patch<CheckUsername>(`${this.baseApiUrl}/${postId}/like`, null);
+    return this.httpClient.patch<Like[]>(`${this.baseApiUrl}/${postId}/like`, null);
   }
 
   getBlogLikes(postId: string) {
     return this.httpClient.get<LikeResponse[]>(`${this.baseApiUrl}/${postId}/likes`);
+  }
+
+  addComment(postId: string, content: string) {
+    return this.httpClient.post<Like>(`${this.baseApiUrl}/${postId}/comment`, { content });
+  }
+
+  getBlogComments(postId: string) {
+    return this.httpClient.get<Comment[]>(`${this.baseApiUrl}/${postId}/comments`);
   }
 }

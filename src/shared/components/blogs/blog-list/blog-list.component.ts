@@ -36,6 +36,8 @@ export class BlogListComponent implements OnInit {
 
   openCreateEditPostDialog() {
     this.dialog.open(CreateEditPostDialogComponent, {
+      width: '50rem',
+      maxWidth: '90vw',
       data: {
         
       }

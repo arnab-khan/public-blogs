@@ -2,6 +2,7 @@ import { Component, inject, Input, OnChanges, OnDestroy, OnInit, SimpleChanges }
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faThumbsUp as solidThumbsUp } from '@fortawesome/free-solid-svg-icons';
 import { faThumbsUp as regularThumbsUp } from '@fortawesome/free-regular-svg-icons';
+import { faCommentDots } from '@fortawesome/free-regular-svg-icons';
 import { Post } from '../../../../interfaces/post';
 import { CommonModule } from '@angular/common';
 import { BlogService } from '../../../services/apis/blog/blog.service';
@@ -11,6 +12,7 @@ import { userSelector } from '../../../ngrx/ngrx.selector';
 import { Subscription } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { PostLikesDialogComponent } from '../../dialogs/post-likes-dialog/post-likes-dialog.component';
+import { PostCommentsDialogComponent } from '../../dialogs/post-comments-dialog/post-comments-dialog.component';
 
 @Component({
   selector: 'app-blog',
@@ -26,8 +28,9 @@ export class BlogComponent implements OnInit, OnChanges, OnDestroy {
   private dialog = inject(MatDialog);
 
   user: User | undefined;
-  solidThumbsUp = solidThumbsUp;
-  regularThumbsUp = regularThumbsUp;
+  solidThumbsUpIcon = solidThumbsUp;
+  regularThumbsUpIcon = regularThumbsUp;
+  commentIcon = faCommentDots;
   userSubscription$: Subscription | undefined;
   authorId: string | undefined;
   isLiked: boolean = false;
@@ -38,10 +41,7 @@ export class BlogComponent implements OnInit, OnChanges, OnDestroy {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['blog'] && this.blog?._id) {
       this.authorId = this.blog?.author?._id;
-      this.isLiked = this.blog?.likes?.some(like => like?.user === this.user?._id) || false;
-      this.noOfLikes = this.blog?.likes?.length || 0;
-      this.noOfComments = this.blog?.comments?.length || 0;
-      this.checkIfLiked();
+      this.setLikeComment();
     }
   }
 
@@ -66,11 +66,25 @@ export class BlogComponent implements OnInit, OnChanges, OnDestroy {
     })
   }
 
+  setLikeComment() {
+    this.checkIfLiked();
+    this.noOfLikes = this.blog?.likes?.length || 0;
+    this.noOfComments = this.blog?.comments?.length || 0;
+  }
+
+
   like() {
     if (this.blog) {
       this.blogService.likeBlog(this.blog._id).subscribe({
         next: (response) => {
           // console.log('like response', response);
+          const likes = response.map(like => {
+            return like.user;
+          });
+          if (this.blog) {
+            Object.assign(this.blog, { likes: likes });
+          }
+          this.setLikeComment();
         },
         error: (error) => {
           console.error('like error', error);
@@ -81,12 +95,28 @@ export class BlogComponent implements OnInit, OnChanges, OnDestroy {
 
   checkIfLiked() {
     if (this.blog?._id && this.userId) {
-      this.isLiked = this.blog?.likes?.some(like => like?.user === this.userId) || false;
+      this.isLiked = this.blog?.likes?.includes(this.userId) || false;
     }
   }
 
   showLikeList() {
     this.dialog.open(PostLikesDialogComponent, {
+      width: '30rem',
+      maxWidth: '90vw',
+      data: {
+        post: this.blog,
+      }
+    }).afterClosed().subscribe((result) => {
+      if (result) {
+
+      }
+    });
+  }
+
+  comment() {
+    this.dialog.open(PostCommentsDialogComponent, {
+      width: '50rem',
+      maxWidth: '90vw',
       data: {
         post: this.blog,
       }

@@ -25,13 +25,17 @@
             </button>
         </div>
         <hr class="my-2 border-info" />
-        <div>
+        <div class="d-flex justify-content-between align-items-center">
             <button (click)="like()">
-                <fa-icon [icon]="isLiked?solidThumbsUp:regularThumbsUp"
+                <fa-icon [icon]="isLiked?solidThumbsUpIcon:regularThumbsUpIcon"
                     class="font-poppins-600-16 text-primary"></fa-icon>
                 <span class="font-poppins-600-16 text-primary">
                     {{isLiked ? 'Unlike' : 'Like'}}
                 </span>
+            </button>
+            <button (click)="comment()">
+                <fa-icon [icon]="commentIcon" class="font-poppins-600-16 text-primary"></fa-icon>
+                <span class="font-poppins-600-16 text-primary ms-1">Comment</span>
             </button>
         </div>
     </div>

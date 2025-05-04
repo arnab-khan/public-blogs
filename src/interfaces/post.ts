@@ -1,30 +1,41 @@
 import { User } from "./auth";
 
-export interface Post {
+interface BasePost {
     _id: string;
     title?: string;
     content?: string;
-    author?: User;
     createdAt?: Date;
     updatedAt?: Date;
-    likes?: Like[];
+    likes?: string[];
     comments?: string[];
     __v?: number;
 }
 
-export interface Like {
-    user: string;
-    likedAt: Date;
-    _id: string
+export interface Post extends BasePost {
+    author?: User;
 }
 
-export interface LikeResponse {
-    user?: User;
+interface BaseLike {
+    _id: string;
     likedAt?: Date;
-    _id: string
+}
+
+export interface Like extends BaseLike {
+    user: string;
+}
+
+export interface LikeResponse extends BaseLike {
+    user?: User;
 }
 
 export interface CreatePost {
     title: string;
     content: string;
+}
+
+export interface Comment {
+    _id: string;
+    content: string;
+    commentedAt: Date;
+    user: User;
 }
