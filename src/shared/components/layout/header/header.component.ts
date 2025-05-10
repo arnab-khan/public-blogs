@@ -4,6 +4,7 @@ import { User } from '../../../../interfaces/auth';
 import { Store } from '@ngrx/store';
 import { userSelector } from '../../../ngrx/ngrx.selector';
 import { removeUser } from '../../../ngrx/ngrx.action';
+import { removeToken } from '../../../utils/local-storage';
 
 @Component({
   selector: 'app-header',
@@ -24,5 +25,6 @@ export class HeaderComponent implements OnInit {
   }
   logout() {
     this.store.dispatch(removeUser());
+    removeToken();
   }
 }

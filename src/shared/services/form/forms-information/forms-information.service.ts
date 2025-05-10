@@ -36,16 +36,20 @@ export class FormsInformationService {
         },
         formFields: [
           {
-            information: this.formFieldsInformationService.fields['name'],
+            information: this.formFieldsInformationService.fields['profilePicture'],
             sequence: 1,
           },
           {
-            information: this.formFieldsInformationService.fields['checkUserName'],
+            information: this.formFieldsInformationService.fields['name'],
             sequence: 2,
           },
           {
-            information: this.formFieldsInformationService.fields['password'],
+            information: this.formFieldsInformationService.fields['checkUserName'],
             sequence: 3,
+          },
+          {
+            information: this.formFieldsInformationService.fields['createPassword'],
+            sequence: 4,
           }
         ]
       }

@@ -3,6 +3,7 @@ import { User } from "./auth";
 interface BasePost {
     _id: string;
     title?: string;
+    totalComments?: number;
     content?: string;
     createdAt?: Date;
     updatedAt?: Date;

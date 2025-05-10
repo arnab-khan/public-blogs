@@ -5,6 +5,8 @@ import { FormsInformationService } from '../../../services/form/forms-informatio
 import { CommonFormComponent } from '../common-form/common-form.component';
 import { Store } from '@ngrx/store';
 import { saveUser } from '../../../ngrx/ngrx.action';
+import { saveToken } from '../../../utils/local-storage';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -16,6 +18,7 @@ export class LoginComponent {
   private formsInformationService = inject(FormsInformationService);
   private authService = inject(AuthService);
   private store = inject(Store);
+  private router = inject(Router);
 
   formInformation = this.formsInformationService.forms.login();
 
@@ -27,7 +30,9 @@ export class LoginComponent {
     this.authService.loginUser(body).subscribe({
       next: (response) => {
         console.log('response', response);
+        saveToken(response.token);
         this.store.dispatch(saveUser(response.user));
+        this.router.navigateByUrl('/');
       },
       error: (error) => {
         console.log('error', error);

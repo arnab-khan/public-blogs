@@ -20,11 +20,12 @@ export class SignUpComponent {
 
   formInformation = this.formsInformationService.forms.signUp();
 
-  createUser(event: { name: string; checkUserName: string; password: string; }) {
+  createUser(event: { name: string; checkUserName: string; password: string; profilePicture: string; }) {
     const body: CreateUser = {
       name: event.name,
       userName: event.checkUserName,
-      password: event.password
+      password: event.password,
+      profilePicture: event?.profilePicture,
     }
     this.authService.createUser(body).subscribe({
       next: (response) => {

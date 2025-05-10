@@ -20,6 +20,31 @@
                     class="font-poppins-400-18 w-100 px-3 py-2">
                 </textarea>
                 }
+                @case ('profilePicture') {
+                <div>
+                    @let profilePicture = fieldControl?.value;
+                    <input #imageUploader type="file" accept="image/*" [placeholder]="fieldInformation?.placeholder"
+                        (change)="openImageUploaderDialog($event, fieldControl)" class="d-none">
+                    <button type="button"
+                        class="bg-secondary rounded-circle position-relative profile-picture-preview-wrapper"
+                        (click)="imageUploader.click()">
+                        @if (profilePicture) {
+                        <img [src]="profilePicture" alt="Profile Picture"
+                            class="w-100 h-100 rounded-circle object-fit-cover" />
+                        } @else {
+                        <div class="w-100 h-100 position-absolute start-0 top-0">
+                            <fa-icon [icon]="userIcon"
+                                class="font-poppins-600-30 text-white position-absolute top-50 start-50 translate-middle"></fa-icon>
+                        </div>
+                        }
+                        <div
+                            class="position-absolute bottom-0 end-0 bg-primary rounded-circle p-1 position-relative profile-picture-edit-icon">
+                            <fa-icon [icon]="pencilIcon"
+                                class="font-poppins-600-16 text-white position-absolute top-50 start-50 translate-middle"></fa-icon>
+                        </div>
+                    </button>
+                </div>
+                }
                 @case ('checkUserName') {
                 <input [formControlName]="'checkUserName'" type="text" [placeholder]="fieldInformation?.placeholder"
                     class="font-poppins-400-18 w-100 px-3 py-2" (input)="inputUserName($event)">

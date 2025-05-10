@@ -1,13 +1,25 @@
 .common-form {
-    // .form-fields{
-    //     .form-field{
-    //         .form-field-wrapper{
-    //             input{
+    .form-fields {
+        .form-field {
+            .form-field-wrapper {
+                .profile-picture-preview-wrapper {
+                    $size: 5rem;
+                    height: $size;
+                    width: $size;
+                    .profile-picture-edit-icon{
+                        $buttonSize: 2rem;
+                        height: $buttonSize;
+                        width: $buttonSize;
+                        fa-icon{
+                            margin-top: .1rem;
+                            margin-left: .1rem;
+                        }
+                    }
+                }
+            }
+        }
+    }
 
-    //             } 
-    //         }
-    //     }
-    // }
     .submit-button {
         display: block;
         padding: 0.5rem 1rem;

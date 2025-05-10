@@ -1,14 +1,20 @@
-import { Component, EventEmitter, inject, Input, OnChanges, Output, output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, inject, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { FormFields, FormInformation, SubmitButton } from '../../../../interfaces/forms-information';
 import { FormGroup, FormBuilder, ReactiveFormsModule, FormControl, Validators, ValidatorFn, AbstractControl, ValidationErrors } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../../services/apis/auth/auth.service';
 import { BehaviorSubject, debounceTime } from 'rxjs';
 import { CheckUsername } from '../../../../interfaces/auth';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faPencil } from '@fortawesome/free-solid-svg-icons';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
+import { MatDialog } from '@angular/material/dialog';
+import { ImageUploaderDialogComponent } from '../../dialogs/image-uploader-dialog/image-uploader-dialog.component';
+
 
 @Component({
   selector: 'app-common-form',
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, FontAwesomeModule],
   templateUrl: './common-form.component.html',
   styleUrl: './common-form.component.scss'
 })
@@ -18,7 +24,7 @@ export class CommonFormComponent implements OnChanges {
 
   private authService = inject(AuthService);
   private formBuilder = inject(FormBuilder);
-
+  private dialog = inject(MatDialog);
 
   formGroup: FormGroup | undefined;
   formFields: FormFields[] = [];
@@ -26,6 +32,8 @@ export class CommonFormComponent implements OnChanges {
 
   inputUserNameObserable = new BehaviorSubject<string>('');
   inputUserNameAvailability: CheckUsername | undefined;
+  pencilIcon = faPencil;
+  userIcon = faUser;
 
   submituttonLoader = false;
 
@@ -99,6 +107,23 @@ export class CommonFormComponent implements OnChanges {
   getFieldControl(controlName: string): FormControl {
     return this.formGroup?.get(controlName) as FormControl;
   }
+
+  // ========== start image uploader ==========
+  openImageUploaderDialog(imageChangedEvent: Event, fieldControl: FormControl) {
+    this.dialog.open(ImageUploaderDialogComponent, {
+      width: '50rem',
+      maxWidth: '90vw',
+      data: {
+        imageChangedEvent: imageChangedEvent,
+      }
+    }).afterClosed().subscribe((result) => {
+      if (result) {
+        const compressedImage = result.image;
+        fieldControl.setValue(compressedImage);
+      }
+    });
+  }
+  // ========== end image uploader ==========
 
   // ========== start apis call ==========
   inputUserName(event: Event): void {

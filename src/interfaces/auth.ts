@@ -7,6 +7,7 @@ export interface CreateUser {
     userName: string;
     password: string;
     name: string;
+    profilePicture?: string;
 }
 
 export interface LoginUser {
@@ -24,4 +25,5 @@ export interface User {
     _id: string;
     userName?: string;
     name?: string;
+    profilePicture?: string;
 }

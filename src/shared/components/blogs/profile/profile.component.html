@@ -1,0 +1,15 @@
+<div class="d-flex">
+    @let name=user?.name;
+    <div class="profile-picture">
+        @let profilePicture=user?.profilePicture;
+        <img [src]="profilePicture" [alt]="name" class="rounded-circle">
+    </div>
+    <div class="ms-2">
+        <span class="font-poppins-600-18 text-black d-block">
+            {{name}}
+        </span>
+        <span class="font-poppins-400-14 text-muted d-block">
+            {{date | date:'medium'}}
+        </span>
+    </div>
+</div>

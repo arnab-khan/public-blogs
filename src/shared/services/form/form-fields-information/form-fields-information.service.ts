@@ -9,6 +9,18 @@ export class FormFieldsInformationService {
   constructor() { }
 
   fields: { [x: string]: FieldInformation } = {
+    profilePicture: {
+      controlName: 'profilePicture',
+      fieldType: 'profilePicture',
+      type: 'file',
+      label: 'Profile Picture',
+      placeholder: 'Upload your profile picture',
+      validation: [
+        { type: 'required', value: true, message: 'Profile Picture is required' },
+        { type: 'fileType', value: ['image/jpeg', 'image/png'], message: 'Profile Picture should be in JPEG or PNG format' },
+        { type: 'fileSize', value: 1024 * 1024, message: 'Profile Picture should be less than 1MB' },
+      ]
+    },
     name: {
       controlName: 'name',
       fieldType: 'text',
@@ -49,6 +61,16 @@ export class FormFieldsInformationService {
       ]
     },
     password: {
+      controlName: 'password',
+      fieldType: 'text',
+      type: 'password',
+      label: 'Password',
+      placeholder: 'Enter your password',
+      validation: [
+        { type: 'required', value: true, message: 'Password is required' },
+      ]
+    },
+    createPassword: {
       controlName: 'password',
       fieldType: 'text',
       type: 'password',

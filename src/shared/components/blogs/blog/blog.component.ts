@@ -13,10 +13,11 @@ import { Subscription } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { PostLikesDialogComponent } from '../../dialogs/post-likes-dialog/post-likes-dialog.component';
 import { PostCommentsDialogComponent } from '../../dialogs/post-comments-dialog/post-comments-dialog.component';
+import { ProfileComponent } from '../profile/profile.component';
 
 @Component({
   selector: 'app-blog',
-  imports: [CommonModule, FontAwesomeModule],
+  imports: [CommonModule, FontAwesomeModule,ProfileComponent],
   templateUrl: './blog.component.html',
   styleUrl: './blog.component.scss'
 })
@@ -69,7 +70,7 @@ export class BlogComponent implements OnInit, OnChanges, OnDestroy {
   setLikeComment() {
     this.checkIfLiked();
     this.noOfLikes = this.blog?.likes?.length || 0;
-    this.noOfComments = this.blog?.comments?.length || 0;
+    this.noOfComments = this.blog?.totalComments || 0;
   }
 
 

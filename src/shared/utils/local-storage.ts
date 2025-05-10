@@ -26,3 +26,8 @@ export function saveToken(token: string) {
 export function getToken() {
     return getLocalStorage('token');
 }
+
+// remove token
+export function removeToken() {
+    removeLocalStorage('token');
+}
