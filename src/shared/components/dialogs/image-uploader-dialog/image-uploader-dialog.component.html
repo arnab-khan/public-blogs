@@ -1,9 +1,8 @@
-<div class="py-4 dialog-content">
-    {{imageCompressPercentage}}
+<div class="py-4 dialog-content bg-white">
     <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true" [aspectRatio]="1 / 1"
         format="jpeg" [roundCropper]="true" output="base64" [imageQuality]="imageCompressPercentage" (imageCropped)="imageCropped($event)">
     </image-cropper>
-    <button [mat-dialog-close]="{image:base64}" class="font-poppins-600-18 mt-5 submit-button btn btn-primary mt-4">
+    <button [mat-dialog-close]="{image:base64}" class="font-poppins-600-18 submit-button btn btn-primary mt-3 mx-auto d-block">
         Submit
     </button>
 </div>

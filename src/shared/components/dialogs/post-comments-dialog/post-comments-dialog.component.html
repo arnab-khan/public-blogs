@@ -23,14 +23,7 @@
     <ul class="px-3 border-top border-info-subtle mt-3 pt-3">
         @for (comment of comments; track $index) {
         <li [ngClass]="{'border-top border-info-subtle mt-3 pt-3': $index > 0}">
-            <div>
-                <span class="font-poppins-600-18 text-black d-block">
-                    {{comment?.user?.name}}
-                </span>
-                <span class="font-poppins-400-14 text-muted d-block">
-                    {{comment?.commentedAt| date:'medium'}}
-                </span>
-            </div>
+            <app-profile [user]="comment?.user" [date]="comment?.commentedAt" [showMenu]="true"></app-profile>
             <p class="font-poppins-400-16 mt-1 text-secondary">
                 {{comment?.content}}
             </p>

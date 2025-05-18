@@ -17,7 +17,7 @@ import { ProfileComponent } from '../profile/profile.component';
 
 @Component({
   selector: 'app-blog',
-  imports: [CommonModule, FontAwesomeModule,ProfileComponent],
+  imports: [CommonModule, FontAwesomeModule, ProfileComponent],
   templateUrl: './blog.component.html',
   styleUrl: './blog.component.scss'
 })

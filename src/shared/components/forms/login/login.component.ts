@@ -29,7 +29,7 @@ export class LoginComponent {
     }
     this.authService.loginUser(body).subscribe({
       next: (response) => {
-        console.log('response', response);
+        // console.log('response', response);
         saveToken(response.token);
         this.store.dispatch(saveUser(response.user));
         this.router.navigateByUrl('/');

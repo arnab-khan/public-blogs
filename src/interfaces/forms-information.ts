@@ -2,6 +2,7 @@ export interface FormsInformation {
     login: () => FormInformation;
     signUp: () => FormInformation;
     post: () => FormInformation;
+    editProfile: () => FormInformation;
 }
 export interface FormInformation {
     submitButton?: SubmitButton;
@@ -21,10 +22,14 @@ export interface FieldInformation {
 }
 export interface Validation {
     type: string;
-    message: string|null;
+    message: string | null;
     value: any;
 }
 export interface SubmitButton {
     label?: string;
     classes?: string;
+}
+
+export interface ControllValue {
+    [controllNAme: string]: any;
 }

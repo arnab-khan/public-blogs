@@ -14,7 +14,9 @@ import { removeToken } from '../../../utils/local-storage';
 })
 export class HeaderComponent implements OnInit {
   private store = inject(Store);
+
   user: User | undefined;
+  
   ngOnInit(): void {
     this.store.select(userSelector).subscribe({
       next: (response) => {

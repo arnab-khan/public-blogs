@@ -1,5 +1,5 @@
 import { Component, EventEmitter, inject, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
-import { FormFields, FormInformation, SubmitButton } from '../../../../interfaces/forms-information';
+import { ControllValue, FormFields, FormInformation, SubmitButton } from '../../../../interfaces/forms-information';
 import { FormGroup, FormBuilder, ReactiveFormsModule, FormControl, Validators, ValidatorFn, AbstractControl, ValidationErrors } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../../services/apis/auth/auth.service';
@@ -20,6 +20,7 @@ import { ImageUploaderDialogComponent } from '../../dialogs/image-uploader-dialo
 })
 export class CommonFormComponent implements OnChanges {
   @Input() formInformation: FormInformation | undefined;
+  @Input() controllValues: ControllValue = {};
   @Output() submitForm = new EventEmitter<any>();
 
   private authService = inject(AuthService);
@@ -43,6 +44,9 @@ export class CommonFormComponent implements OnChanges {
       this.formButton = this.formInformation?.submitButton;
       this.formFields = this.formInformation?.formFields || [];
       this.createForm();
+    }
+    if (changes['controllValues']) {
+      this.patchControllValue();
     }
   }
 
@@ -82,6 +86,17 @@ export class CommonFormComponent implements OnChanges {
     this.formGroup = this.formBuilder.group(controlls);
     console.log('formGroup value', this.formGroup.value);
     this.checkIfUserNameExists();
+    this.patchControllValue();
+  }
+
+  patchControllValue() {
+    if (this.formGroup && Object.keys(this.controllValues).length) {
+      for (const controllName in this.controllValues) {
+        const controll = this.getFieldControl(controllName);
+        const controllValue = this.controllValues[controllName];
+        controll.patchValue(controllValue);
+      }
+    }
   }
 
   // ========== start custom validetion ==========

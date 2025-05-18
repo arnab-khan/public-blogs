@@ -71,6 +71,28 @@ export class FormsInformationService {
           }
         ]
       }
+    },
+    editProfile: () => {
+      return {
+        submitButton: {
+          label: 'Save',
+          classes: 'btn btn-primary',
+        },
+        formFields: [
+          {
+            information: this.formFieldsInformationService.fields['profilePicture'],
+            sequence: 1,
+          },
+          {
+            information: this.formFieldsInformationService.fields['name'],
+            sequence: 2,
+          },
+          // {
+          //   information: this.formFieldsInformationService.fields['userName'],
+          //   sequence: 3,
+          // }
+        ]
+      }
     }
   }
 }

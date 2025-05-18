@@ -6,10 +6,11 @@ import { FormsModule } from '@angular/forms';
 import { BlogService } from '../../../services/apis/blog/blog.service';
 import { Comment, Post } from '../../../../interfaces/post';
 import { CommonModule } from '@angular/common';
+import { ProfileComponent } from '../../blogs/profile/profile.component';
 
 @Component({
   selector: 'app-post-comments-dialog',
-  imports: [CommonModule, MatDialogModule, FontAwesomeModule, FormsModule],
+  imports: [CommonModule, MatDialogModule, FontAwesomeModule, FormsModule, ProfileComponent],
   templateUrl: './post-comments-dialog.component.html',
   styleUrl: './post-comments-dialog.component.scss'
 })

@@ -27,4 +27,8 @@ export class AuthService {
   getUser() {
     return this.httpClient.get<User>(`${this.baseApiUrl}/user`);
   }
+
+  editProfile(body: CreateUser) {
+    return this.httpClient.patch<UserResponse>(`${this.baseApiUrl}/user`, body);
+  }
 }

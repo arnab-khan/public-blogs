@@ -3,7 +3,8 @@
         <li class="flex-lg-grow-1 left">
             <ul class="row row-cols-auto menues">
                 <li class="text-success menu">
-                    <a routerLink="blogs" class="font-poppins-600-18 text-primary link">Blogs</a>
+                    <a routerLinkActive="active-manu" routerLink="blogs"
+                        class="font-poppins-600-18 text-primary link">Blogs</a>
                 </li>
             </ul>
         </li>
@@ -11,7 +12,8 @@
             <ul class="row row-cols-auto menues">
                 @if (user?._id) {
                 <li class="text-success menu">
-                    <a routerLink="login" class="font-poppins-600-18 text-primary link">My Profile</a>
+                    <a routerLinkActive="active-manu" routerLink="edit-profile"
+                        class="font-poppins-600-18 text-primary link">Edit Profile</a>
                 </li>
                 <li class="text-success menu">
                     <button type="button" class="font-poppins-600-18 text-primary link" (click)="logout()">
@@ -20,10 +22,12 @@
                 </li>
                 } @else {
                 <li class="text-success menu">
-                    <a routerLink="login" class="font-poppins-600-18 text-primary link">Login</a>
+                    <a routerLinkActive="active-manu" routerLink="login"
+                        class="font-poppins-600-18 text-primary link">Login</a>
                 </li>
                 <li class="text-success menu">
-                    <a routerLink="sign-up" class="font-poppins-600-18 text-primary link">Sign Up</a>
+                    <a routerLinkActive="active-manu" routerLink="sign-up"
+                        class="font-poppins-600-18 text-primary link">Sign Up</a>
                 </li>
                 }
             </ul>

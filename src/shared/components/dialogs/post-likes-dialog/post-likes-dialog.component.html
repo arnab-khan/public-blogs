@@ -9,12 +9,7 @@
     <ul class="px-3 border-top border-info-subtle mt-3 pt-3">
         @for (like of likes; track $index) {
         <li [ngClass]="{'border-top border-info-subtle mt-3 pt-3': $index > 0}">
-            <span class="font-poppins-600-18 text-black d-block">
-                {{like?.user?.name}}
-            </span>
-            <span class="font-poppins-400-14 text-muted d-block">
-                {{like?.likedAt| date:'medium'}}
-            </span>
+            <app-profile [user]="like?.user" [date]="like?.likedAt"></app-profile>
         </li>
         }
     </ul>

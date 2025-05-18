@@ -1,15 +1,32 @@
-<div class="d-flex">
-    @let name=user?.name;
-    <div class="profile-picture">
-        @let profilePicture=user?.profilePicture;
-        <img [src]="profilePicture" [alt]="name" class="rounded-circle">
+<div class="d-flex justify-content-between align-items-start">
+    <div class="d-flex">
+        @let name=user?.name;
+        <div class="profile-picture">
+            @let profilePicture=user?.profilePicture;
+            <img [src]="profilePicture" [alt]="name" class="rounded-circle">
+        </div>
+        <div class="ms-2">
+            <span class="font-poppins-600-18 text-black d-block">
+                {{name}}
+            </span>
+            <span class="font-poppins-400-14 text-muted d-block">
+                {{date | date:'medium'}}
+            </span>
+        </div>
     </div>
-    <div class="ms-2">
-        <span class="font-poppins-600-18 text-black d-block">
-            {{name}}
-        </span>
-        <span class="font-poppins-400-14 text-muted d-block">
-            {{date | date:'medium'}}
-        </span>
-    </div>
+    @if (user?._id==loginUser?._id && showMenu) {
+    <button class="ms-3" [matMenuTriggerFor]="menu">
+        <fa-icon [icon]="threeDotMenuIcon" class="font-poppins-600-16 text-dark"></fa-icon>
+    </button>
+    }
 </div>
+
+
+<mat-menu #menu="matMenu">
+    <button mat-menu-item class="font-poppins-600-18 text-dark">
+        Edit
+    </button>
+    <button mat-menu-item class="font-poppins-600-18 text-danger">
+        Delete
+    </button>
+</mat-menu>

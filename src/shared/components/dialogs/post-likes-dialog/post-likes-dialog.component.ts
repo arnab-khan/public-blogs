@@ -5,10 +5,11 @@ import { BlogService } from '../../../services/apis/blog/blog.service';
 import { CommonModule } from '@angular/common';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ProfileComponent } from '../../blogs/profile/profile.component';
 
 @Component({
   selector: 'app-post-likes-dialog',
-  imports: [CommonModule, MatDialogModule, FontAwesomeModule],
+  imports: [CommonModule, MatDialogModule, FontAwesomeModule, ProfileComponent],
   templateUrl: './post-likes-dialog.component.html',
   styleUrl: './post-likes-dialog.component.scss'
 })
