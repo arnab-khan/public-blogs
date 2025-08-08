@@ -51,7 +51,7 @@
                 <div class="font-poppins-400-16">
                     @if (fieldControl.errors?.['userNameExists']) {
                     <span class="text-danger">❌ Username is already taken. Please choose another.</span>}
-                    @else if (fieldControl.value) {
+                    @else if (fieldControl.value && !fieldControl.errors) {
                     <span class="text-success">✅ Username is available.</span>}
                 </div>
                 }

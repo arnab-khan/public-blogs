@@ -1,7 +1,5 @@
 .profile-picture {
-    img {
-        $size: 2rem;
-        height: $size;
-        width: $size;
-    }
+    $size: 2rem;
+    height: $size;
+    width: $size;
 }

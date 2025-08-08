@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { MatDialogRef } from '@angular/material/dialog';
 import { CreateEditPostComponent } from '../../forms/create-edit-post/create-edit-post.component';
 
 @Component({
@@ -8,5 +9,9 @@ import { CreateEditPostComponent } from '../../forms/create-edit-post/create-edi
   styleUrl: './create-edit-post-dialog.component.scss'
 })
 export class CreateEditPostDialogComponent {
+  private dialogRef = inject(MatDialogRef<CreateEditPostDialogComponent>);
 
+  onBlogCreated(response: any) {
+    this.dialogRef.close(response);
+  }
 }

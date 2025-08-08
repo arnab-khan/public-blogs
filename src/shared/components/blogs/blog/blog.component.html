@@ -24,7 +24,7 @@
         </div>
         <hr class="my-2 border-info" />
         <div class="d-flex justify-content-between align-items-center">
-            <button (click)="like()">
+            <button (click)="like()" [ngClass]="{'invisible':!userId}">
                 <fa-icon [icon]="isLiked?solidThumbsUpIcon:regularThumbsUpIcon"
                     class="font-poppins-600-16 text-primary"></fa-icon>
                 <span class="font-poppins-600-16 text-primary">

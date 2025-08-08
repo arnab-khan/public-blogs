@@ -1,4 +1,5 @@
-import { Component, Input, input } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { Router } from '@angular/router';
 import { SignUpComponent } from '../../../shared/components/forms/sign-up/sign-up.component';
 
 @Component({
@@ -8,5 +9,11 @@ import { SignUpComponent } from '../../../shared/components/forms/sign-up/sign-u
   styleUrl: './sign-up-page.component.scss'
 })
 export class SignUpPageComponent {
-  
+  private router = inject(Router);
+
+  onUserCreated(event: any) {
+    if (event) {
+      this.router.navigate(['/blogs']);
+    }
+  }
 }

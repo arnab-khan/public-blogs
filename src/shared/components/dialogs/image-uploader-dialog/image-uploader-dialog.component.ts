@@ -1,6 +1,7 @@
 import { Component, inject, Inject, OnInit } from '@angular/core';
 import { NgxImageCompressService } from 'ngx-image-compress';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { SafeUrl } from '@angular/platform-browser';
 import { ImageCropperComponent, ImageCroppedEvent } from 'ngx-image-cropper';
 
@@ -13,6 +14,7 @@ import { ImageCropperComponent, ImageCroppedEvent } from 'ngx-image-cropper';
 export class ImageUploaderDialogComponent implements OnInit {
   private imageCompress = inject(NgxImageCompressService);
   private dialogRef = inject(MatDialogRef);
+  private snackBar = inject(MatSnackBar);
 
   imageChangedEvent: Event | undefined
   croppedImageUrl: SafeUrl | undefined;
@@ -30,6 +32,12 @@ export class ImageUploaderDialogComponent implements OnInit {
     this.imageChangedEvent = this.data.imageChangedEvent;
     const file = (this.imageChangedEvent.target as HTMLInputElement).files?.[0];
     if (file) {
+      const fileSizeInMB = file.size / (1024 * 1024);
+      if (fileSizeInMB > 2) {
+        this.snackBar.open('Image size should not exceed 2MB', 'Close', { duration: 3000 });
+        this.dialogRef.close();
+        return;
+      }
       this.imageSize = file.size / 1024; // Convert bytes to kilobytes
       this.imageCompressPercentage = (20 / this.imageSize) * 100;
     }
@@ -40,7 +48,7 @@ export class ImageUploaderDialogComponent implements OnInit {
     if (event) {
       // this.croppedImageUrl = this.sanitizer.bypassSecurityTrustUrl(objectUrl);
       this.base64 = event?.base64;
-      // this.imageCompresser();
+      this.imageCompresser();
       // console.log(this.base64); // Undefined
       console.log(event);
 

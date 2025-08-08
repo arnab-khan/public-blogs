@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, Output, EventEmitter } from '@angular/core';
 import { FormsInformationService } from '../../../services/form/forms-information/forms-information.service';
 import { CommonFormComponent } from "../common-form/common-form.component";
 import { CreateUser } from '../../../../interfaces/auth';
@@ -18,6 +18,8 @@ export class SignUpComponent {
   private authService = inject(AuthService);
   private store = inject(Store);
 
+  @Output() userCreated = new EventEmitter<any>();
+
   formInformation = this.formsInformationService.forms.signUp();
 
   createUser(event: { name: string; checkUserName: string; password: string; profilePicture: string; }) {
@@ -32,6 +34,7 @@ export class SignUpComponent {
         console.log('response', response);
         saveToken(response.token);
         this.store.dispatch(saveUser(response.user));
+        this.userCreated.emit(response);
       },
       error: (error) => {
         console.log('error', error);

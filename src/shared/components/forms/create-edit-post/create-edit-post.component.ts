@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, Output, EventEmitter } from '@angular/core';
 import { FormsInformationService } from '../../../services/form/forms-information/forms-information.service';
 import { BlogService } from '../../../services/apis/blog/blog.service';
 import { CreatePost } from '../../../../interfaces/post';
@@ -14,17 +14,19 @@ export class CreateEditPostComponent {
   private formsInformationService = inject(FormsInformationService);
   private blogService = inject(BlogService);
 
+  @Output() blogCreated = new EventEmitter<any>();
+
   formInformation = this.formsInformationService.forms.post();
 
   createBlog(body: CreatePost) {
     this.blogService.createBlog(body).subscribe({
       next: (response) => {
         console.log('response', response);
-
+        this.blogCreated.emit(response);
       },
       error: (error) => {
         console.log('error', error);
-      }
+      },
     })
   }
 }

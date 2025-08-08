@@ -6,6 +6,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { Store } from '@ngrx/store';
 import { userSelector } from '../../../ngrx/ngrx.selector';
 import { MatMenuModule } from '@angular/material/menu';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-profile',
@@ -23,6 +24,8 @@ export class ProfileComponent implements OnInit {
 
   threeDotMenuIcon = faEllipsis;
   loginUser: User | undefined;
+
+  userIcon = faUser;
 
   ngOnInit(): void {
     this.store.select(userSelector).subscribe({
