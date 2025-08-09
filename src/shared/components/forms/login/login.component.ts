@@ -7,6 +7,7 @@ import { Store } from '@ngrx/store';
 import { saveUser } from '../../../ngrx/ngrx.action';
 import { saveToken } from '../../../utils/local-storage';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login',
@@ -19,6 +20,7 @@ export class LoginComponent {
   private authService = inject(AuthService);
   private store = inject(Store);
   private router = inject(Router);
+  private snackBar = inject(MatSnackBar);
 
   formInformation = this.formsInformationService.forms.login();
 
@@ -34,8 +36,10 @@ export class LoginComponent {
         this.store.dispatch(saveUser(response.user));
         this.router.navigateByUrl('/');
       },
-      error: (error) => {
-        console.log('error', error);
+      error: (error) => {        
+        this.snackBar.open(error?.error?.error, 'Close', {
+          duration: 5000
+        });
       }
     })
   }
