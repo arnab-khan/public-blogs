@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store';
 import { saveUser } from '../shared/ngrx/ngrx.action';
 import { HeaderComponent } from '../shared/components/layout/header/header.component';
 import { FooterComponent } from '../shared/components/layout/footer/footer.component';
+import { getToken } from '../shared/utils/local-storage';
 
 @Component({
   selector: 'app-root',
@@ -21,14 +22,17 @@ export class AppComponent implements OnInit {
   }
 
   getUser() {
-    this.authService.getUser().subscribe({
-      next: (response) => {
-        console.log('user', response);
-        this.store.dispatch(saveUser(response));
-      },
-      error: (error) => {
-        console.log('error', error);
-      }
-    })
+    const token = getToken();
+    if (token) {
+      this.authService.getUser().subscribe({
+        next: (response) => {
+          console.log('user', response);
+          this.store.dispatch(saveUser(response));
+        },
+        error: (error) => {
+          console.log('error', error);
+        }
+      })
+    }
   }
 }
