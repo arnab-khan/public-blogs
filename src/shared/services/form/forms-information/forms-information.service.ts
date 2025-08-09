@@ -93,6 +93,24 @@ export class FormsInformationService {
           // }
         ]
       }
-    }
+    },
+    changePasssword: () => {
+      return {
+        submitButton: {
+          label: 'Login',
+          classes: 'btn btn-primary',
+        },
+        formFields: [
+          {
+            information: this.formFieldsInformationService.fields['password'],
+            sequence: 1,
+          },
+          {
+            information: this.formFieldsInformationService.fields['newPassword'],
+            sequence: 2,
+          }
+        ],
+      }
+    },
   }
 }

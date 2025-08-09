@@ -1,6 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { MatDialog } from '@angular/material/dialog';
 import { CreateUser, LoginUser, User } from '../../../interfaces/auth';
 import { saveUser } from '../../../shared/ngrx/ngrx.action';
 import { AuthService } from '../../../shared/services/apis/auth/auth.service';
@@ -9,6 +10,7 @@ import { saveToken } from '../../../shared/utils/local-storage';
 import { CommonFormComponent } from '../../../shared/components/forms/common-form/common-form.component';
 import { userSelector } from '../../../shared/ngrx/ngrx.selector';
 import { ControllValue } from '../../../interfaces/forms-information';
+import { ChangePasswordDialogComponent } from '../../../shared/components/dialogs/change-password-dialog/change-password-dialog.component';
 
 @Component({
   selector: 'app-edit-profile-page',
@@ -26,6 +28,7 @@ export class EditProfilePageComponent implements OnInit {
   private authService = inject(AuthService);
   private store = inject(Store);
   private router = inject(Router);
+  private dialog = inject(MatDialog);
 
   formInformation = this.formsInformationService.forms.editProfile();
   user: User | undefined;
@@ -63,5 +66,17 @@ export class EditProfilePageComponent implements OnInit {
         console.log('error', error);
       }
     })
+  }
+
+  openChangePasswordDialog() {
+    const dialogRef = this.dialog.open(ChangePasswordDialogComponent, {
+      width: '400px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        console.log('Password changed successfully');
+      }
+    });
   }
 }

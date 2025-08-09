@@ -19,27 +19,27 @@ export function loggingInterceptor(req: HttpRequest<unknown>, next: HttpHandlerF
     return next(req).pipe(tap(event => {
 
         // Log the HTTP method of the request (GET, POST, etc.)
-        console.log('api method', req.method);
+        // console.log('api method', req.method);
         // Example output:
         // api method GET
         // (Tells you which type of request you made)
 
         // Log the numeric value of HttpEventType.Response
-        console.log('api response', HttpEventType.Response);
+        // console.log('api response', HttpEventType.Response);
         // Example output:
         // api response 4
         // (Because HttpEventType.Response is an enum with value 4 for a completed response)
 
 
         // Log the type of the current HTTP event
-        console.log('api type', event.type);
+        // console.log('api type', event.type);
         // Example output:
         // api type 4
         // (Meaning the event is a full HTTP response — matches HttpEventType.Response)
 
 
         // Log the URL of the API request that was made
-        console.log('api url', req.url);
+        // console.log('api url', req.url);
         // Example output:
         // api url https://api.example.com/users
         // (The URL of the outgoing HTTP request)
@@ -49,13 +49,13 @@ export function loggingInterceptor(req: HttpRequest<unknown>, next: HttpHandlerF
         if (event.type === HttpEventType.Response) {
 
             // Log the actual API response body
-            console.log('api response body', event.body);
+            // console.log('api response body', event.body);
             // Example output:
             // api response body { id: 1, name: 'John Doe' }
             // (full JSON data returned from the server)
 
             // Log the HTTP status code (like 200 OK, 404 Not Found, etc.)
-            console.log('api status', event.status);
+            // console.log('api status', event.status);
             // Example output:
             // api url 200
             // (Meaning the server responded with HTTP status 200 = OK)

@@ -3,6 +3,7 @@ export interface FormsInformation {
     signUp: () => FormInformation;
     post: () => FormInformation;
     editProfile: () => FormInformation;
+    changePasssword: () => FormInformation;
 }
 export interface FormInformation {
     submitButton?: SubmitButton;

@@ -4,5 +4,10 @@
         <app-common-form [formInformation]="formInformation" [controllValues]="controllValues"
             (submitForm)="saveProfile($event)">
         </app-common-form>
+        <div class="text-center mt-3">
+            <button type="button" class="btn btn-outline-secondary" (click)="openChangePasswordDialog()">
+                Change Password
+            </button>
+        </div>
     </div>
 </section>

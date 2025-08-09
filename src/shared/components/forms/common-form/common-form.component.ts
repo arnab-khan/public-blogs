@@ -93,8 +93,10 @@ export class CommonFormComponent implements OnChanges {
     if (this.formGroup && Object.keys(this.controllValues).length) {
       for (const controllName in this.controllValues) {
         const controll = this.getFieldControl(controllName);
-        const controllValue = this.controllValues[controllName];
-        controll.patchValue(controllValue);
+        if (controll) {
+          const controllValue = this.controllValues[controllName];
+          controll.patchValue(controllValue);
+        }
       }
     }
   }

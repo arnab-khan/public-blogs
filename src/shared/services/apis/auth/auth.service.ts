@@ -31,4 +31,8 @@ export class AuthService {
   editProfile(body: CreateUser) {
     return this.httpClient.patch<UserResponse>(`${this.baseApiUrl}/user`, body);
   }
+
+  changePassword(body: { currentPassword: string; newPassword: string }) {
+    return this.httpClient.patch<{ message: string }>(`${this.baseApiUrl}/change-password`, body);
+  }
 }

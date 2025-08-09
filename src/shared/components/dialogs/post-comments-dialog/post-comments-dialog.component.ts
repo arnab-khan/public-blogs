@@ -23,6 +23,7 @@ export class PostCommentsDialogComponent implements OnInit, OnDestroy {
   private store = inject(Store);
 
   closeIcon = faTimes;
+  
   post: Post | undefined;
   postId: string | undefined;
   inputComment: string = '';
