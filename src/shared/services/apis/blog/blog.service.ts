@@ -38,4 +38,8 @@ export class BlogService {
   deleteBlog(postId: string) {
     return this.httpClient.delete<{ message: string }>(`${this.baseApiUrl}/${postId}`);
   }
+
+  updateBlog(postId: string, body: { title?: string; content?: string }) {
+    return this.httpClient.patch<Post>(`${this.baseApiUrl}/${postId}`, body);
+  }
 }

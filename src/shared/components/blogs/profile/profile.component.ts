@@ -9,6 +9,8 @@ import { MatMenuModule } from '@angular/material/menu';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { BlogService } from '../../../services/apis/blog/blog.service';
 import { Post } from '../../../../interfaces/post';
+import { MatDialog } from '@angular/material/dialog';
+import { CreateEditPostDialogComponent } from '../../dialogs/create-edit-post-dialog/create-edit-post-dialog.component';
 
 @Component({
   selector: 'app-profile',
@@ -26,6 +28,7 @@ export class ProfileComponent implements OnInit {
 
   private store = inject(Store);
   private blogService = inject(BlogService);
+  private dialog = inject(MatDialog);
 
   threeDotMenuIcon = faEllipsis;
   loginUser: User | undefined;
@@ -54,6 +57,20 @@ export class ProfileComponent implements OnInit {
         }
       });
     }
+  }
+
+  editBlog() {
+    this.dialog.open(CreateEditPostDialogComponent, {
+      width: '50rem',
+      maxWidth: '90vw',
+      data: {
+        blog: this.blog
+      }
+    }).afterClosed().subscribe((result) => {
+      if (result) {
+        this.blogUpdated.emit(result);
+      }
+    });
   }
 
 }

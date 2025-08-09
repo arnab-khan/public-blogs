@@ -1,6 +1,9 @@
 <section class="p-3 post-section">
     <div class="container-2 mw-100 mx-auto">
-        <h1>Post a blog</h1>
-        <app-common-form [formInformation]="formInformation" (submitForm)="createBlog($event)"></app-common-form>
+        <h1 class="font-poppins-900-26 text-center text-info">
+            @if (blog?._id) {Edit blog} @else {Post a blog}
+        </h1>
+        <app-common-form [formInformation]="formInformation" [controllValues]="formValue"
+            (submitForm)="createBlog($event)"></app-common-form>
     </div>
 </section>
