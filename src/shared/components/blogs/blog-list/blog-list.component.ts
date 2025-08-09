@@ -4,6 +4,9 @@ import { Post } from '../../../../interfaces/post';
 import { BlogComponent } from '../blog/blog.component';
 import { CreateEditPostDialogComponent } from '../../dialogs/create-edit-post-dialog/create-edit-post-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { Store } from '@ngrx/store';
+import { User } from '../../../../interfaces/auth';
+import { userSelector } from '../../../ngrx/ngrx.selector';
 
 @Component({
   selector: 'app-blog-list',
@@ -15,11 +18,18 @@ export class BlogListComponent implements OnInit {
 
   private dialog = inject(MatDialog);
   private blogService = inject(BlogService);
+  private store = inject(Store);
 
   blogs: Post[] = [];
+  user: User | undefined;
 
   ngOnInit(): void {
     this.getBlogs();
+    this.store.select(userSelector).subscribe({
+      next: (response) => {
+        this.user = response;
+      }
+    });
   }
 
   getBlogs() {
