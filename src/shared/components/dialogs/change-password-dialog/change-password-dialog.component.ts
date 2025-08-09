@@ -1,12 +1,12 @@
 import { Component, inject } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
-import { ChangePasswordComponent } from '../../auths/change-password/change-password.component';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { ChangePasswordComponent } from '../../../services/form/change-password/change-password.component';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @Component({
   selector: 'app-change-password-dialog',
-  imports: [ChangePasswordComponent, FontAwesomeModule],
+  imports: [ChangePasswordComponent, FontAwesomeModule, MatDialogModule],
   templateUrl: './change-password-dialog.component.html',
   styleUrl: './change-password-dialog.component.scss'
 })

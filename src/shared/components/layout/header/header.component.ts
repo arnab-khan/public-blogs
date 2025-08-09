@@ -5,10 +5,11 @@ import { Store } from '@ngrx/store';
 import { userSelector } from '../../../ngrx/ngrx.selector';
 import { removeUser } from '../../../ngrx/ngrx.action';
 import { removeToken } from '../../../utils/local-storage';
+import { ProfileComponent } from '../../blogs/profile/profile.component';
 
 @Component({
   selector: 'app-header',
-  imports: [RouterModule],
+  imports: [RouterModule, ProfileComponent],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })

@@ -24,7 +24,7 @@
             </span>
         </div>
     </div>
-    @if (user?._id==loginUser?._id && showMenu) {
+    @if (user?._id==loginUser?._id && showMenu && !onlyProfile) {
     <button class="ms-3" [matMenuTriggerFor]="menu">
         <fa-icon [icon]="threeDotMenuIcon" class="font-poppins-600-16 text-dark"></fa-icon>
     </button>

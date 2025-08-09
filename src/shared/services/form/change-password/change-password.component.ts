@@ -1,7 +1,7 @@
 import { Component, inject, output } from '@angular/core';
-import { AuthService } from '../../../services/apis/auth/auth.service';
-import { FormsInformationService } from '../../../services/form/forms-information/forms-information.service';
-import { CommonFormComponent } from '../../forms/common-form/common-form.component';
+import { AuthService } from '../../apis/auth/auth.service';
+import { FormsInformationService } from '../forms-information/forms-information.service';
+import { CommonFormComponent } from '../../../components/forms/common-form/common-form.component';
 
 @Component({
   selector: 'app-change-password',

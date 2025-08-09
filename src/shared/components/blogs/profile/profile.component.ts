@@ -24,6 +24,7 @@ export class ProfileComponent implements OnInit {
   @Input() date: Date | undefined;
   @Input() showMenu: boolean = false;
   @Input() blog: Post | undefined;
+  @Input() onlyProfile: boolean = false;
   @Output() blogUpdated = new EventEmitter<Post>();
 
   private store = inject(Store);

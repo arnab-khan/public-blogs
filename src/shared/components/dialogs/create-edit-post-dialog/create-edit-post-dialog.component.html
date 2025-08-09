@@ -1,3 +1,8 @@
-<div class="px-lg-3 py-2 py-lg-4 dialog-content">
-    <app-create-edit-post [blog]="data.blog" (blogCreated)="onBlogCreated($event)"></app-create-edit-post>
+<div class="py-4 position-relative text-break dialog-content">
+    <button type="button" mat-dialog-close class="m-3 mt-2 position-absolute top-0 end-0">
+        <fa-icon [icon]="closeIcon" class="font-poppins-600-20 text-black"></fa-icon>
+    </button>
+    <div class="px-3 mt-2">
+        <app-create-edit-post [blog]="data.blog" (blogCreated)="onBlogCreated($event)"></app-create-edit-post>
+    </div>
 </div>

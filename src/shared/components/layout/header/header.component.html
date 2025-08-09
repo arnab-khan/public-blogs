@@ -20,6 +20,11 @@
                         Logout
                     </button>
                 </li>
+                <li>
+                    <button routerLink="edit-profile" class="border-dark-subtle ps-3 profile">
+                        <app-profile [user]="user" [onlyProfile]="true"></app-profile>
+                    </button>
+                </li>
                 } @else {
                 <li class="text-success menu">
                     <a routerLinkActive="active-manu" routerLink="login"
