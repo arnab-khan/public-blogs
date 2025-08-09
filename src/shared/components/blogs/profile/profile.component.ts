@@ -11,6 +11,7 @@ import { BlogService } from '../../../services/apis/blog/blog.service';
 import { Post } from '../../../../interfaces/post';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateEditPostDialogComponent } from '../../dialogs/create-edit-post-dialog/create-edit-post-dialog.component';
+import { Comment } from '../../../../interfaces/post';
 
 @Component({
   selector: 'app-profile',
@@ -25,7 +26,11 @@ export class ProfileComponent implements OnInit {
   @Input() showMenu: boolean = false;
   @Input() blog: Post | undefined;
   @Input() onlyProfile: boolean = false;
+  @Input() comment: any | undefined;
+  @Input() postId: string | undefined;
+  @Input() isComment: boolean = false;
   @Output() blogUpdated = new EventEmitter<Post>();
+  @Output() commentUpdated = new EventEmitter<void>();
 
   private store = inject(Store);
   private blogService = inject(BlogService);
@@ -72,6 +77,35 @@ export class ProfileComponent implements OnInit {
         this.blogUpdated.emit(result);
       }
     });
+  }
+
+  deleteComment() {
+    if (this.postId && this.comment?._id) {
+      this.blogService.deleteComment(this.postId, this.comment._id).subscribe({
+        next: (response) => {
+          console.log('Comment deleted successfully', response);
+          this.commentUpdated.emit();
+        },
+        error: (error) => {
+          console.error('Error deleting comment', error);
+        }
+      });
+    }
+  }
+
+  editComment() {
+    const newContent = prompt('Edit comment:', this.comment?.content);
+    if (newContent && newContent.trim() && this.postId && this.comment?._id) {
+      this.blogService.editComment(this.postId, this.comment._id, newContent.trim()).subscribe({
+        next: (response) => {
+          console.log('Comment updated successfully', response);
+          this.commentUpdated.emit();
+        },
+        error: (error) => {
+          console.error('Error updating comment', error);
+        }
+      });
+    }
   }
 
 }

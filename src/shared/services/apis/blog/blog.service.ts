@@ -42,4 +42,12 @@ export class BlogService {
   updateBlog(postId: string, body: { title?: string; content?: string }) {
     return this.httpClient.patch<Post>(`${this.baseApiUrl}/${postId}`, body);
   }
+
+  editComment(postId: string, commentId: string, content: string) {
+    return this.httpClient.patch<Comment[]>(`${this.baseApiUrl}/${postId}/comment/${commentId}`, { content });
+  }
+
+  deleteComment(postId: string, commentId: string) {
+    return this.httpClient.delete<{ message: string }>(`${this.baseApiUrl}/${postId}/comment/${commentId}`);
+  }
 }

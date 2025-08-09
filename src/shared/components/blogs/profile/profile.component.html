@@ -33,10 +33,19 @@
 
 
 <mat-menu #menu="matMenu">
-    <button mat-menu-item class="font-poppins-600-18 text-dark" (click)="editBlog()">
-        Edit
-    </button>
-    <button mat-menu-item class="font-poppins-600-18 text-danger" (click)="deleteBlog()">
-        Delete
-    </button>
+    @if (isComment) {
+        <button mat-menu-item class="font-poppins-600-18 text-dark" (click)="editComment()">
+            Edit
+        </button>
+        <button mat-menu-item class="font-poppins-600-18 text-danger" (click)="deleteComment()">
+            Delete
+        </button>
+    } @else {
+        <button mat-menu-item class="font-poppins-600-18 text-dark" (click)="editBlog()">
+            Edit
+        </button>
+        <button mat-menu-item class="font-poppins-600-18 text-danger" (click)="deleteBlog()">
+            Delete
+        </button>
+    }
 </mat-menu>

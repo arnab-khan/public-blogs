@@ -25,7 +25,9 @@
     <ul class="px-3 border-top border-info-subtle mt-3 pt-3">
         @for (comment of comments; track $index) {
         <li [ngClass]="{'border-top border-info-subtle mt-3 pt-3': $index > 0}">
-            <app-profile [user]="comment?.user" [date]="comment?.commentedAt" [showMenu]="true"></app-profile>
+            <app-profile [user]="comment?.user" [date]="comment?.commentedAt" [showMenu]="true" 
+                         [comment]="comment" [postId]="postId" [isComment]="true" 
+                         (commentUpdated)="getComments()"></app-profile>
             <p class="font-poppins-400-16 mt-1 text-secondary">
                 {{comment?.content}}
             </p>
