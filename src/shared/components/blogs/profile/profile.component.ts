@@ -1,4 +1,4 @@
-import { Component, inject, Input, OnInit } from '@angular/core';
+import { Component, inject, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { User } from '../../../../interfaces/auth';
 import { CommonModule } from '@angular/common';
 import { faEllipsis } from '@fortawesome/free-solid-svg-icons';
@@ -7,6 +7,8 @@ import { Store } from '@ngrx/store';
 import { userSelector } from '../../../ngrx/ngrx.selector';
 import { MatMenuModule } from '@angular/material/menu';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
+import { BlogService } from '../../../services/apis/blog/blog.service';
+import { Post } from '../../../../interfaces/post';
 
 @Component({
   selector: 'app-profile',
@@ -19,8 +21,11 @@ export class ProfileComponent implements OnInit {
   @Input() user: User | undefined;
   @Input() date: Date | undefined;
   @Input() showMenu: boolean = false;
+  @Input() blog: Post | undefined;
+  @Output() blogUpdated = new EventEmitter<Post>();
 
   private store = inject(Store);
+  private blogService = inject(BlogService);
 
   threeDotMenuIcon = faEllipsis;
   loginUser: User | undefined;
@@ -34,6 +39,21 @@ export class ProfileComponent implements OnInit {
         // console.log('user', this.user);
       }
     })
+  }
+
+  deleteBlog() {
+    const postId = this.blog?._id;
+    if (postId) {
+      this.blogService.deleteBlog(postId).subscribe({
+        next: (response) => {
+          console.log('Post deleted successfully', response);
+          this.blogUpdated.emit(this.blog!);
+        },
+        error: (error) => {
+          console.error('Error deleting post', error);
+        }
+      });
+    }
   }
 
 }

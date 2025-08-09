@@ -47,4 +47,10 @@ export class BlogListComponent implements OnInit {
       }
     });
   }
+
+  onBlogUpdated(blog: Post) {
+    if (blog) {
+      this.getBlogs();
+    }
+  }
 }

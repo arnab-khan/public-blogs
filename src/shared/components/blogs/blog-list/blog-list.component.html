@@ -8,7 +8,7 @@
         <ul>
             @for (blog of blogs; track $index) {
             <li class="shadow rounded-3 p-3 mt-4 bg-white">
-                <app-blog [blog]="blog"></app-blog>
+                <app-blog [blog]="blog" (blogUpdated)="onBlogUpdated($event)"></app-blog>
             </li>
             }
         </ul>

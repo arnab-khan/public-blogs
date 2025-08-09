@@ -1,4 +1,4 @@
-import { Component, inject, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
+import { Component, inject, Input, OnChanges, OnDestroy, OnInit, SimpleChanges, Output, EventEmitter } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faThumbsUp as solidThumbsUp } from '@fortawesome/free-solid-svg-icons';
 import { faThumbsUp as regularThumbsUp } from '@fortawesome/free-regular-svg-icons';
@@ -23,6 +23,7 @@ import { ProfileComponent } from '../profile/profile.component';
 })
 export class BlogComponent implements OnInit, OnChanges, OnDestroy {
   @Input() blog: Post | undefined;
+  @Output() blogUpdated = new EventEmitter<Post>();
 
   private blogService = inject(BlogService);
   private store = inject(Store);
@@ -126,5 +127,9 @@ export class BlogComponent implements OnInit, OnChanges, OnDestroy {
 
       }
     });
+  }
+
+  onBlogUpdated(blog: Post) {
+    this.blogUpdated.emit(blog);
   }
 }

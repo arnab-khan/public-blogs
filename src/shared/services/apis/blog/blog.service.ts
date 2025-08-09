@@ -34,4 +34,8 @@ export class BlogService {
   getBlogComments(postId: string) {
     return this.httpClient.get<Comment[]>(`${this.baseApiUrl}/${postId}/comments`);
   }
+
+  deleteBlog(postId: string) {
+    return this.httpClient.delete<{ message: string }>(`${this.baseApiUrl}/${postId}`);
+  }
 }
