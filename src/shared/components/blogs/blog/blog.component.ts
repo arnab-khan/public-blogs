@@ -123,6 +123,7 @@ export class BlogComponent implements OnInit, OnChanges, OnDestroy {
         post: this.blog,
       }
     }).afterClosed().subscribe((result) => {
+      this.blogUpdated.emit(this.blog);
       if (result) {
 
       }
