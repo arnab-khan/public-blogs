@@ -32,14 +32,26 @@ export class CreateEditPostComponent implements OnChanges {
   }
 
   createBlog(body: CreatePost) {
-    this.blogService.createBlog(body).subscribe({
-      next: (response) => {
-        console.log('response', response);
-        this.blogCreated.emit(response);
-      },
-      error: (error) => {
-        console.log('error', error);
-      },
-    })
+    if (this.blog) {
+      this.blogService.updateBlog(this.blog._id!, body).subscribe({
+        next: (response) => {
+          console.log('response', response);
+          this.blogCreated.emit(response);
+        },
+        error: (error) => {
+          console.log('error', error);
+        },
+      });
+    } else {
+      this.blogService.createBlog(body).subscribe({
+        next: (response) => {
+          console.log('response', response);
+          this.blogCreated.emit(response);
+        },
+        error: (error) => {
+          console.log('error', error);
+        },
+      });
+    }
   }
 }
