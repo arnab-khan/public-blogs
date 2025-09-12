@@ -9,18 +9,20 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faPencil } from '@fortawesome/free-solid-svg-icons';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { MatDialog } from '@angular/material/dialog';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ImageUploaderDialogComponent } from '../../dialogs/image-uploader-dialog/image-uploader-dialog.component';
 
 
 @Component({
   selector: 'app-common-form',
-  imports: [CommonModule, ReactiveFormsModule, FontAwesomeModule],
+  imports: [CommonModule, ReactiveFormsModule, FontAwesomeModule, MatProgressSpinnerModule],
   templateUrl: './common-form.component.html',
   styleUrl: './common-form.component.scss'
 })
 export class CommonFormComponent implements OnChanges {
   @Input() formInformation: FormInformation | undefined;
   @Input() controllValues: ControllValue = {};
+  @Input() submituttonLoader = false;
   @Output() submitForm = new EventEmitter<any>();
 
   private authService = inject(AuthService);
@@ -33,10 +35,10 @@ export class CommonFormComponent implements OnChanges {
 
   inputUserNameObserable = new BehaviorSubject<string>('');
   inputUserNameAvailability: CheckUsername | undefined;
+  isCheckingUsername = false;
+  clickedSubmitButton = false;
   pencilIcon = faPencil;
   userIcon = faUser;
-
-  submituttonLoader = false;
 
   ngOnChanges(changes: SimpleChanges): void {
     console.log('formInformation', this.formInformation);
@@ -114,10 +116,10 @@ export class CommonFormComponent implements OnChanges {
 
   submit() {
     console.log('formGroup value', this.formGroup?.value);
-    if (this.formGroup?.status == 'VALID') {
+    this.clickedSubmitButton = true;
+    if (this.formGroup?.status == 'VALID' && !this.isCheckingUsername) {
+      this.submituttonLoader = true;
       this.submitForm.emit(this.formGroup?.value);
-    } else {
-
     }
   }
 
@@ -144,10 +146,11 @@ export class CommonFormComponent implements OnChanges {
 
   // ========== start apis call ==========
   inputUserName(event: Event): void {
+    this.isCheckingUsername = true;
     const inputValue = (event.target as HTMLInputElement).value;
     this.inputUserNameObserable.next(inputValue);
-
   }
+
   checkIfUserNameExists() {
     const fieldControll = this.getFieldControl('checkUserName');
     this.inputUserNameObserable.pipe(
@@ -160,11 +163,15 @@ export class CommonFormComponent implements OnChanges {
               console.log('response', response);
               this.inputUserNameAvailability = response;
               fieldControll.updateValueAndValidity();
+              this.isCheckingUsername = false;
             },
             error: (error) => {
               console.log('error', error);
+              this.isCheckingUsername = false;
             }
           });
+        } else {
+          this.isCheckingUsername = false;
         }
       }
     })

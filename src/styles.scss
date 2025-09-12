@@ -79,6 +79,20 @@ strong {
 
 
 
+
+// ==================== Start material style ====================
+
+.progress-spinner-white {
+  @include mat.progress-spinner-overrides((
+    active-indicator-color: white,
+  ));
+}
+
+// ==================== Start material style ====================
+
+
+
+
 // ==================== Start common classes ====================
 
 .container-1 {

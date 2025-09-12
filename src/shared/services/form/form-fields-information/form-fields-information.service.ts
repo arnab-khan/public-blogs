@@ -16,7 +16,7 @@ export class FormFieldsInformationService {
       label: 'Profile Picture',
       placeholder: 'Upload your profile picture',
       validation: [
-        { type: 'required', value: true, message: 'Profile Picture is required' },
+        // { type: 'required', value: true, message: 'Profile Picture is required' },
         { type: 'fileType', value: ['image/jpeg', 'image/png'], message: 'Profile Picture should be in JPEG or PNG format' },
         { type: 'fileSize', value: 1024 * 1024, message: 'Profile Picture should be less than 1MB' },
       ]

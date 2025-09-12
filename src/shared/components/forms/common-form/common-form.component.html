@@ -47,26 +47,37 @@
                 }
                 @case ('checkUserName') {
                 <input [formControlName]="'checkUserName'" type="text" [placeholder]="fieldInformation?.placeholder"
-                    class="font-poppins-400-18 w-100 px-3 py-2" (input)="inputUserName($event)">
+                    class="font-poppins-400-18 w-100 px-3 py-2" (input)="!fieldControl.errors?.['minlength']&&inputUserName($event)">
                 <div class="font-poppins-400-16">
-                    @if (fieldControl.errors?.['userNameExists']) {
+                    @if (fieldControl.value && !fieldControl.errors?.['minlength']) {
+                    @if (isCheckingUsername) {
+                    <span class="text-info">⏳ Checking username availability...</span>}
+                    @else if (fieldControl.errors?.['userNameExists']) {
                     <span class="text-danger">❌ Username is already taken. Please choose another.</span>}
                     @else if (fieldControl.value && !fieldControl.errors) {
                     <span class="text-success">✅ Username is available.</span>}
+                    }
                 </div>
                 }
                 }
                 @for (validation of fieldInformation.validation; track $index) {
                 @let message = validation?.message;
-                @if (fieldControl.errors?.[validation.type] && message) {
+                @if (fieldControl.errors?.[validation.type] && message && (validation.type !== 'required' || clickedSubmitButton)) {
                 <div class="font-poppins-400-16 text-danger">{{message}}</div>
                 }}
             </div>
         </li>
         }
     </ul>
-    <button type="submit" class="font-poppins-600-18 mt-5 submit-button" [ngClass]="formButton?.classes">
-        {{formButton?.label||'Submit'}}
+    <button type="submit" class="font-poppins-600-18 mt-5 position-relative submit-button"
+        [ngClass]="formButton?.classes" [disabled]="submituttonLoader">
+        <span [ngClass]="{'invisible': submituttonLoader}">
+            {{formButton?.label||'Submit'}}
+        </span>
+        @if (submituttonLoader) {
+        <mat-spinner diameter="20"
+            class="position-absolute top-50 start-50 translate-middle progress-spinner-white"></mat-spinner>
+        }
     </button>
 </form>
 }

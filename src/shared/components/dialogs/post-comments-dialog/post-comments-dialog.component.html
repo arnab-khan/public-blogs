@@ -3,7 +3,7 @@
         <fa-icon [icon]="closeIcon" class="font-poppins-600-20 text-black"></fa-icon>
     </button>
     @if (userId) {
-    <div class="px-3 mt-2">
+    <div class="px-3 mt-2 pb-3 border-bottom border-info-subtle">
         <div class="p-3 border-secondary border-2 border overflow-hidden bg-white comment-wrapper">
             <div class="font-poppins-400-18 position-relative comment">
                 <span class="d-block">{{inputComment}}</span>
@@ -22,17 +22,20 @@
     </div>
     }
     @if (comments.length) {
-    <ul class="px-3 border-top border-info-subtle mt-3 pt-3">
+    <ul class="px-3 pt-3">
         @for (comment of comments; track $index) {
         <li [ngClass]="{'border-top border-info-subtle mt-3 pt-3': $index > 0}">
-            <app-profile [user]="comment?.user" [date]="comment?.commentedAt" [showMenu]="true" 
-                         [comment]="comment" [postId]="postId" [isComment]="true" 
-                         (commentUpdated)="getComments()"></app-profile>
+            <app-profile [user]="comment?.user" [date]="comment?.commentedAt" [showMenu]="true" [comment]="comment"
+                [postId]="postId" [isComment]="true" (commentUpdated)="getComments()"></app-profile>
             <p class="font-poppins-400-16 mt-1 text-secondary">
                 {{comment?.content}}
             </p>
         </li>
         }
     </ul>
+    } @else {
+    <div class="px-3 pt-3 text-center">
+        <p class="font-poppins-400-16 text-muted">No comments yet.</p>
+    </div>
     }
 </div>
