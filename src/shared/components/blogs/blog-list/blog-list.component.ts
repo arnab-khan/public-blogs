@@ -4,13 +4,15 @@ import { Post, PostsParams } from '../../../../interfaces/post';
 import { BlogComponent } from '../blog/blog.component';
 import { CreateEditPostDialogComponent } from '../../dialogs/create-edit-post-dialog/create-edit-post-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { Store } from '@ngrx/store';
 import { User } from '../../../../interfaces/auth';
 import { userSelector } from '../../../ngrx/ngrx.selector';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-blog-list',
-  imports: [BlogComponent],
+  imports: [BlogComponent, MatProgressSpinnerModule, CommonModule],
   templateUrl: './blog-list.component.html',
   styleUrl: './blog-list.component.scss'
 })
@@ -23,6 +25,7 @@ export class BlogListComponent implements OnInit {
   blogs: Post[] = [];
   user: User | undefined;
   initialBlogsLoading = true;
+  loadMoreLoading = false;
   page: number = 1;
   itemsPerPage: number = 10;
   hasNext = false;
@@ -56,6 +59,7 @@ export class BlogListComponent implements OnInit {
         }
         this.hasNext = response?.pagination?.hasNext;
         this.initialBlogsLoading = false;
+        this.loadMoreLoading = false;
       },
       error: (error) => {
         console.log('error', error);
@@ -64,6 +68,7 @@ export class BlogListComponent implements OnInit {
   }
 
   loadMore() {
+    this.loadMoreLoading = true;
     this.page++;
     this.getBlogs();
   }

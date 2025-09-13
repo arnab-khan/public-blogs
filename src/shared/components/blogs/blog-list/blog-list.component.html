@@ -21,8 +21,15 @@
         </ul>
         @if (hasNext) {
         <div class="text-center mt-4">
-            <button class="btn btn-outline-primary font-poppins-600-16" (click)="loadMore()">
-                Show More
+            <button class="btn btn-outline-primary font-poppins-600-16 position-relative" (click)="loadMore()"
+                [disabled]="loadMoreLoading">
+                @if (loadMoreLoading) {
+                <mat-spinner diameter="20"
+                    class="me-2 position-absolute top-50 start-50 translate-middle"></mat-spinner>
+                }
+                <span [ngClass]="{ 'invisible': loadMoreLoading }">
+                    Show More
+                </span>
             </button>
         </div>
         }
