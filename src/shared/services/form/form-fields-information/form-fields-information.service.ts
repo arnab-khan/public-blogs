@@ -80,7 +80,7 @@ export class FormFieldsInformationService {
         { type: 'required', value: true, message: 'Password is required' },
         { type: 'minlength', value: 6, message: 'Password should be at least 6 characters long' },
         { type: 'maxlength', value: 20, message: 'Password should not exceed 20 characters' },
-        { type: 'pattern', value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]+$/, message: 'Password must contain at least one letter, one number, and no spaces' },
+        { type: 'pattern', value: /^(?=.*[A-Za-z])(?=.*\d)[^\s]+$/, message: 'Password must contain at least one letter, one number, and no spaces' },
       ]
     },
     newPassword: {
@@ -93,7 +93,7 @@ export class FormFieldsInformationService {
         { type: 'required', value: true, message: 'New password is required' },
         { type: 'minlength', value: 6, message: 'Password should be at least 6 characters long' },
         { type: 'maxlength', value: 20, message: 'Password should not exceed 20 characters' },
-        { type: 'pattern', value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]+$/, message: 'Password must contain at least one letter, one number, and no spaces' },
+        { type: 'pattern', value: /^(?=.*[A-Za-z])(?=.*\d)[^\s]+$/, message: 'Password must contain at least one letter, one number, and no spaces' },
       ]
     },
     title: {
