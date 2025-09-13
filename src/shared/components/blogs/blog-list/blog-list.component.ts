@@ -93,4 +93,9 @@ export class BlogListComponent implements OnInit {
       });
     }
   }
+  onBlogDeleted(blog: Post) {
+    if (blog) {
+      this.getInitialBlogs();
+    }
+  }
 }

@@ -24,6 +24,7 @@ import { ProfileComponent } from '../profile/profile.component';
 export class BlogComponent implements OnInit, OnChanges, OnDestroy {
   @Input() blog: Post | undefined;
   @Output() blogUpdated = new EventEmitter<Post>();
+  @Output() blogDeleted = new EventEmitter<Post>();
 
   private blogService = inject(BlogService);
   private store = inject(Store);
@@ -130,5 +131,8 @@ export class BlogComponent implements OnInit, OnChanges, OnDestroy {
 
   onBlogUpdated(blog: Post) {
     this.blogUpdated.emit(blog);
+  }
+  onBlogDeleted(blog: Post) {
+    this.blogDeleted.emit(blog);
   }
 }

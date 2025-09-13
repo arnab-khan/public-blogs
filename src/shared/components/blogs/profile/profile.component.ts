@@ -30,6 +30,7 @@ export class ProfileComponent implements OnInit {
   @Input() postId: string | undefined;
   @Input() isComment: boolean = false;
   @Output() blogUpdated = new EventEmitter<Post>();
+  @Output() blogDeleted = new EventEmitter<Post>();
   @Output() commentUpdated = new EventEmitter<void>();
 
   private store = inject(Store);
@@ -56,7 +57,7 @@ export class ProfileComponent implements OnInit {
       this.blogService.deleteBlog(postId).subscribe({
         next: (response) => {
           console.log('Post deleted successfully', response);
-          this.blogUpdated.emit(this.blog!);
+          this.blogDeleted.emit(this.blog!);
         },
         error: (error) => {
           console.error('Error deleting post', error);

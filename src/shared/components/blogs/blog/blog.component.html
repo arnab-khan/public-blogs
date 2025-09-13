@@ -1,6 +1,6 @@
 <section class="blog-section">
     <app-profile [user]="blog?.author" [blog]="blog" [date]="blog?.createdAt" [showMenu]="true"
-        (blogUpdated)="onBlogUpdated($event)"></app-profile>
+        (blogUpdated)="onBlogUpdated($event)" (blogDeleted)="onBlogDeleted($event)"></app-profile>
     <hr class="my-2 border-info" />
     <div class="bg-light p-2 rounded-2">
         <h2 class="font-poppins-500-18">
