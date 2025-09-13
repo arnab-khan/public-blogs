@@ -2,7 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { CheckUsername } from '../../../../interfaces/auth';
-import { Comment, CreatePost, Like, LikeResponse, Post } from '../../../../interfaces/post';
+import { Comment, CreatePost, Like, LikeResponse, Post, PostsParams, PostsResponse } from '../../../../interfaces/post';
+import { toHttpParams } from '../../../utils/http';
 
 @Injectable({
   providedIn: 'root'
@@ -11,8 +12,9 @@ export class BlogService {
   private httpClient = inject(HttpClient);
   private baseApiUrl = `${environment.rootApiUrl}/post`;
 
-  getBlogs() {
-    return this.httpClient.get<Post[]>(this.baseApiUrl);
+  getBlogs(params: PostsParams) {
+    const httpParams = params ? toHttpParams(params) : undefined;
+    return this.httpClient.get<PostsResponse>(this.baseApiUrl, { params: httpParams });
   }
 
   createBlog(body: CreatePost) {

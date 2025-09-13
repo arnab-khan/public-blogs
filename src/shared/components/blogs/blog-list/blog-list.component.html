@@ -15,10 +15,17 @@
         <ul>
             @for (blog of blogs; track $index) {
             <li class="shadow rounded-3 p-3 mt-4 bg-white">
-                <app-blog [blog]="blog" (blogUpdated)="onBlogUpdated($event)"></app-blog>
+                <app-blog [blog]="blog" (blogUpdated)="onBlogUpdated($event, blog)"></app-blog>
             </li>
             }
         </ul>
+        @if (hasNext) {
+        <div class="text-center mt-4">
+            <button class="btn btn-outline-primary font-poppins-600-16" (click)="loadMore()">
+                Show More
+            </button>
+        </div>
+        }
         }
     </div>
 </section>

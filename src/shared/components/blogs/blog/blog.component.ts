@@ -37,7 +37,9 @@ export class BlogComponent implements OnInit, OnChanges, OnDestroy {
   authorId: string | undefined;
   isLiked: boolean = false;
   noOfLikes: number = 0;
-  noOfComments: number = 0;
+  get noOfComments(): number {
+    return this.blog?.totalComments || 0;
+  }
   userId: string | undefined;
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -71,7 +73,6 @@ export class BlogComponent implements OnInit, OnChanges, OnDestroy {
   setLikeComment() {
     this.checkIfLiked();
     this.noOfLikes = this.blog?.likes?.length || 0;
-    this.noOfComments = this.blog?.totalComments || 0;
   }
 
 
@@ -124,9 +125,6 @@ export class BlogComponent implements OnInit, OnChanges, OnDestroy {
       }
     }).afterClosed().subscribe((result) => {
       this.blogUpdated.emit(this.blog);
-      if (result) {
-
-      }
     });
   }
 

@@ -15,7 +15,7 @@ import { getToken } from '../shared/utils/local-storage';
 })
 export class AppComponent implements OnInit {
   private authService = inject(AuthService);
-  private store = inject(Store)
+  private store = inject(Store);
 
   ngOnInit(): void {
     this.getUser();
@@ -31,6 +31,7 @@ export class AppComponent implements OnInit {
         },
         error: (error) => {
           console.log('error', error);
+          this.authService.logout();
         }
       })
     }

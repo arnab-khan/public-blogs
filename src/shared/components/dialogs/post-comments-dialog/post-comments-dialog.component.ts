@@ -23,7 +23,7 @@ export class PostCommentsDialogComponent implements OnInit, OnDestroy {
   private store = inject(Store);
 
   closeIcon = faTimes;
-  
+
   post: Post | undefined;
   postId: string | undefined;
   inputComment: string = '';
@@ -79,6 +79,13 @@ export class PostCommentsDialogComponent implements OnInit, OnDestroy {
         next: (response) => {
           console.log('comments', response);
           this.comments = response.reverse(); // reverse to show latest comments first
+          console.log(this.post);
+          
+          if (this.post) {
+            Object.assign(this.post, {
+              totalComments: response?.length || 0
+            })
+          }
         },
         error: (error) => {
           console.error('error', error);

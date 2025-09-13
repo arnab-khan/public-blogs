@@ -23,11 +23,12 @@ export class CreateEditPostComponent implements OnChanges {
   formInformation = this.formsInformationService.forms.post();
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes?.['blog'] && this.blog) {
+    if (changes?.['blog'] && this.blog?._id) {
       this.formValue = {
         title: this.blog?.title,
         content: this.blog?.content,
       }
+      this.formInformation = this.formsInformationService.forms.editPost();
     }
   }
 

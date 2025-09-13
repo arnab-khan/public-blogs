@@ -1,8 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { toHttpParams } from '../../../utils/http';
 import { environment } from '../../../../environments/environment';
 import { CheckUsername, CreateUser, LoginUser, User, UserResponse } from '../../../../interfaces/auth';
+import { removeUser } from '../../../ngrx/ngrx.action';
+import { removeToken } from '../../../utils/local-storage';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +14,8 @@ import { CheckUsername, CreateUser, LoginUser, User, UserResponse } from '../../
 export class AuthService {
 
   private httpClient = inject(HttpClient);
+  private store = inject(Store);
+  private router = inject(Router);
   private baseApiUrl = `${environment.rootApiUrl}/auth`;
 
   checkIfUserExists(userName: string) {
@@ -34,5 +40,11 @@ export class AuthService {
 
   changePassword(body: { currentPassword: string; newPassword: string }) {
     return this.httpClient.patch<{ message: string }>(`${this.baseApiUrl}/change-password`, body);
+  }
+
+  logout() {
+    this.store.dispatch(removeUser());
+    removeToken();
+    this.router.navigate(['/login']);
   }
 }

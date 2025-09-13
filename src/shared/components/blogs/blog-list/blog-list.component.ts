@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { BlogService } from '../../../services/apis/blog/blog.service';
-import { Post } from '../../../../interfaces/post';
+import { Post, PostsParams } from '../../../../interfaces/post';
 import { BlogComponent } from '../blog/blog.component';
 import { CreateEditPostDialogComponent } from '../../dialogs/create-edit-post-dialog/create-edit-post-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
@@ -23,9 +23,12 @@ export class BlogListComponent implements OnInit {
   blogs: Post[] = [];
   user: User | undefined;
   initialBlogsLoading = true;
+  page: number = 1;
+  itemsPerPage: number = 10;
+  hasNext = false;
 
   ngOnInit(): void {
-    this.getBlogs();
+    this.getInitialBlogs();
     this.store.select(userSelector).subscribe({
       next: (response) => {
         this.user = response;
@@ -33,11 +36,25 @@ export class BlogListComponent implements OnInit {
     });
   }
 
+  getInitialBlogs() {
+    this.page = 1;
+    this.getBlogs();
+  }
+
   getBlogs() {
-    this.blogService.getBlogs().subscribe({
+    const params: PostsParams = {
+      page: this.page,
+      itemsPerPage: this.itemsPerPage
+    }
+    this.blogService.getBlogs(params).subscribe({
       next: (response) => {
         console.log('blogs', response);
-        this.blogs = response;
+        if (this.page && this.page > 1) {
+          this.blogs = [...this.blogs, ...response?.posts || []];
+        } else {
+          this.blogs = response?.posts || [];
+        }
+        this.hasNext = response?.pagination?.hasNext;
         this.initialBlogsLoading = false;
       },
       error: (error) => {
@@ -46,23 +63,29 @@ export class BlogListComponent implements OnInit {
     })
   }
 
+  loadMore() {
+    this.page++;
+    this.getBlogs();
+  }
+
   openCreateEditPostDialog() {
     this.dialog.open(CreateEditPostDialogComponent, {
       width: '50rem',
       maxWidth: '90vw',
-      data: {
-        
-      }
+      data: {}
     }).afterClosed().subscribe((result) => {
       if (result) {
-        this.getBlogs();
+        this.getInitialBlogs();
       }
     });
   }
 
-  onBlogUpdated(blog: Post) {
-    if (blog) {
-      this.getBlogs();
+  onBlogUpdated(updatedBlog: Post, currentBlog: Post) {
+    if (updatedBlog) {
+      Object.assign(currentBlog, {
+        title: updatedBlog?.title || '',
+        content: updatedBlog?.content || '',
+      });
     }
   }
 }

@@ -72,6 +72,24 @@ export class FormsInformationService {
         ]
       }
     },
+    editPost: () => {
+      return {
+        submitButton: {
+          label: 'Edit Post',
+          classes: 'btn btn-primary',
+        },
+        formFields: [
+          {
+            information: this.formFieldsInformationService.fields['title'],
+            sequence: 1,
+          },
+          {
+            information: this.formFieldsInformationService.fields['content'],
+            sequence: 2,
+          }
+        ]
+      }
+    },
     editProfile: () => {
       return {
         submitButton: {

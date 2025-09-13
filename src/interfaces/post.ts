@@ -40,3 +40,21 @@ export interface Comment {
     commentedAt: Date;
     user: User;
 }
+
+export interface PostsPagination {
+    currentPage: number;
+    totalPages: number;
+    totalPosts: number;
+    hasNext: boolean;
+    hasPrev: boolean;
+}
+
+export interface PostsParams {
+    page: number;
+    itemsPerPage: number;
+}
+
+export interface PostsResponse {
+    posts: Post[];
+    pagination: PostsPagination;
+}

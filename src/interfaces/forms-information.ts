@@ -2,6 +2,7 @@ export interface FormsInformation {
     login: () => FormInformation;
     signUp: () => FormInformation;
     post: () => FormInformation;
+    editPost: () => FormInformation;
     editProfile: () => FormInformation;
     changePasssword: () => FormInformation;
 }
