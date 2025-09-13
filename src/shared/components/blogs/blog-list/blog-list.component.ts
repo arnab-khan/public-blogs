@@ -22,6 +22,7 @@ export class BlogListComponent implements OnInit {
 
   blogs: Post[] = [];
   user: User | undefined;
+  initialBlogsLoading = true;
 
   ngOnInit(): void {
     this.getBlogs();
@@ -37,6 +38,7 @@ export class BlogListComponent implements OnInit {
       next: (response) => {
         console.log('blogs', response);
         this.blogs = response;
+        this.initialBlogsLoading = false;
       },
       error: (error) => {
         console.log('error', error);

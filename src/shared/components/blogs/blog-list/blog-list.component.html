@@ -7,6 +7,11 @@
             Write a blog
         </button>
         }
+        @if (initialBlogsLoading) {
+        <div class="text-center mt-5">
+            <p class="font-poppins-500-16">Loading blogs...</p>
+        </div>
+        } @else {
         <ul>
             @for (blog of blogs; track $index) {
             <li class="shadow rounded-3 p-3 mt-4 bg-white">
@@ -14,5 +19,6 @@
             </li>
             }
         </ul>
+        }
     </div>
 </section>
