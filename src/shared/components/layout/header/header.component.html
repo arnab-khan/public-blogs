@@ -1,9 +1,11 @@
 <nav class="px-3 px-md-4 px-xl-5 py-2">
+    @if (user?._id) {
     <div class="d-sm-none mb-2">
         <button routerLink="edit-profile" class="d-block ms-auto">
             <app-profile [user]="user" [onlyProfile]="true"></app-profile>
         </button>
     </div>
+    }
     <ul class="row row-cols-auto justify-content-sm-between align-items-center">
         <li class="flex-lg-grow-1 left">
             <ul class="row row-cols-auto menues">

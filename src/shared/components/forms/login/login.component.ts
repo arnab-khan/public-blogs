@@ -22,9 +22,12 @@ export class LoginComponent {
   private router = inject(Router);
   private snackBar = inject(MatSnackBar);
 
+  submituttonLoader = false;
+
   formInformation = this.formsInformationService.forms.login();
 
   loginUser(event: { name: string; userName: string; password: string; }) {
+    this.submituttonLoader = true;
     const body: LoginUser = {
       userName: event.userName,
       password: event.password
@@ -36,7 +39,8 @@ export class LoginComponent {
         this.store.dispatch(saveUser(response.user));
         this.router.navigateByUrl('/');
       },
-      error: (error) => {        
+      error: (error) => {
+        this.submituttonLoader = false;
         this.snackBar.open(error?.error?.error, 'Close', {
           duration: 5000
         });
